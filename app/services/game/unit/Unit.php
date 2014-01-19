@@ -12,19 +12,12 @@ abstract class Unit extends Element
 
 	protected $log = [];
 
-	protected $location;
 	protected $direction = 'east';
-
-
-	public function __construct(Location $location)
-	{
-		$this->location = $location;
-	}
 
 
 	public function attack()
 	{
-
+		$this->addLog('unit attacks');
 	}
 
 
