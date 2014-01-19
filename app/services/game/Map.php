@@ -15,13 +15,13 @@ class Map
 				$location = new Location($h, $w);
 				$void = new Void($location);
 
-				$this->addElement($void);
+				$this->setElement($void);
 			}
 		}
 	}
 
 
-	public function addElement(Element $element)
+	public function setElement(Element $element)
 	{
 		$location = $element->getLocation();
 

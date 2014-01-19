@@ -28,7 +28,7 @@ class HomeController extends BaseController
 		$warrior = new Warrior($location);
 
 		$map = new Map(5, 5);
-		$map->addElement($warrior);
+		$map->setElement($warrior);
 
 		$player = new Player($warrior);
 
@@ -38,6 +38,7 @@ class HomeController extends BaseController
 		}
 
 		return Response::json(json_encode($warrior->getLog()));
+		//return Response::json(json_encode($map));
 	}
 }
 
@@ -60,6 +61,7 @@ class Player
   	public function play_turn()
   	{
     	Log::info('played a turn');
+    	$this->warrior->feel();
   	}
 }
 
