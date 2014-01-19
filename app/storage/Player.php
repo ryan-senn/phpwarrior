@@ -14,6 +14,7 @@ class Player
 
   	public function play_turn()
   	{
-    	Log::info('played a turn');
+    	        Log::info('played a turn');
+                $this->warrior->feel();
   	}
 }

@@ -1,12 +1,15 @@
 <?php namespace Services\Game\Unit;
 
+use Services\Game\Space;
+
+
 class Warrior extends Unit
 {
 	
 
 	public function feel($direction = 'forward')
 	{
-		$this->log('warrior feels '. $direction);
+		$this->addLog('warrior feels '. $direction);
 
 		return new Space($this->location, $direction);
 	}
@@ -14,7 +17,7 @@ class Warrior extends Unit
 
 	public function walk($direction = 'forward')
 	{
-		$this->log('warrior walks '. $direction);
+		$this->addLog('warrior walks '. $direction);
 
 		$this->location->move($direction);
 	}
@@ -22,7 +25,7 @@ class Warrior extends Unit
 
 	public function rest()
 	{
-		$this->log('warrior rests');
+		$this->addLog('warrior rests');
 
 		$this->gainHealth(2);
 	}

@@ -1,5 +1,8 @@
 <?php namespace Services\Game;
 
+use Services\Game\Location;
+
+
 class Space
 {
 	
