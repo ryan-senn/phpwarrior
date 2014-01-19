@@ -1,23 +1,66 @@
 <?php
 
-class HomeController extends BaseController {
+use Services\Game\Location;
+use Services\Game\Unit\Warrior;
+use Services\Game\Map;
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
 
-	public function showWelcome()
+class HomeController extends BaseController
+{
+
+	protected $layout = 'layouts.base';
+
+
+	public function index()
 	{
-		return View::make('hello');
+		$this->layout->content = View::make('pages.home.index');
 	}
 
+
+	public function submit()
+	{
+		$code = Input::get('code');
+
+		file_put_contents(storage_path() .'/Player.php', $code);
+		require(storage_path() .'/Player.php');
+
+		$location = new Location(1, 2);
+		$warrior = new Warrior($location);
+
+		$map = new Map(5, 5);
+		$map->addElement($warrior);
+
+		$player = new Player($warrior);
+
+		for($i = 0; $i < 10; $i++)
+		{
+			$player->play_turn();
+		}
+
+		return Response::json(json_encode($warrior->getLog()));
+	}
 }
+
+/*
+
+<?php
+
+class Player
+{
+
+	protected $warrior;
+
+
+	public function __construct($warrior)
+	{
+		$this->warrior = $warrior;
+	}
+	
+
+  	public function play_turn()
+  	{
+    	Log::info('played a turn');
+  	}
+}
+
+*/
