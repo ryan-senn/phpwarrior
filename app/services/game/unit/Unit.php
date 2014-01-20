@@ -1,7 +1,7 @@
 <?php namespace Services\Game\Unit;
 
 use Services\Game\Element;
-use Services\Game\Location;
+use Services\Game\Position;
 
 
 abstract class Unit extends Element

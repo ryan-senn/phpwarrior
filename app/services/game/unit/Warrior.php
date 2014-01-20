@@ -5,13 +5,13 @@ use Services\Game\Space;
 
 class Warrior extends Unit
 {
-	
+
 
 	public function feel($direction = 'forward')
 	{
 		$this->addLog('warrior feels '. $direction);
 
-		return new Space($this->location, $direction);
+		return new Space($this->position->getRelativeTo($direction));
 	}
 
 
@@ -19,7 +19,7 @@ class Warrior extends Unit
 	{
 		$this->addLog('warrior walks '. $direction);
 
-		$this->location->move($direction);
+		$this->position->move($direction);
 	}
 
 

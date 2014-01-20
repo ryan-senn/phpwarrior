@@ -3,6 +3,8 @@
 class Map
 {
 	
+	protected $height;
+	protected $width;
 	protected $elements = [];
 
 
@@ -10,12 +12,9 @@ class Map
 	{
 		for($h = 0; $h < $height; $h++)
 		{
-			for($w = 0; $w < $width; $w++)
+			for($w = 0; $w < $height; $w++)
 			{
-				$location = new Location($h, $w);
-				$void = new Void($location);
-
-				$this->setElement($void);
+				$this->elements[$h][$w] = null;
 			}
 		}
 	}
@@ -23,14 +22,33 @@ class Map
 
 	public function setElement(Element $element)
 	{
-		$location = $element->getLocation();
+		$position = $element->getPosition();
 
-		$this->elements[$location->getX()][$location->getY()] = $element;
+		$this->elements[$position->getX()][$position->getY()] = $element;
 	}
 
 
 	public function getElements()
 	{
 		return $this->elements;
+	}
+
+
+	public function getPosition($x, $y)
+	{
+		return $this->elements[$x][$y];
+	}
+
+
+	public function display()
+	{
+		for($h = 0; $h < $height; $h++)
+		{
+			for($w = 0; $w < $height; $w++)
+			{
+				echo '[ ]';
+			}
+			echo '<br />';
+		}
 	}
 }

@@ -3,17 +3,17 @@
 abstract class Element
 {
 	
-	protected $location;
+	protected $position;
 
 
-	public function __construct(Location $location)
+	public function __construct(Position $position)
 	{
-		$this->location = $location;
+		$this->position = $position;
 	}
 
 
-	public function getLocation()
+	public function getPosition()
 	{
-		return $this->location;
+		return $this->position;
 	}
 }

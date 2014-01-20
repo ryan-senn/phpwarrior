@@ -1,23 +1,26 @@
 <?php namespace Services\Game;
 
-use Services\Game\Location;
+use Services\Game\Position;
 
 
 class Space
 {
 	
-	protected $location;
+	protected $position;
 
 
-	public function __construct(Location $location)
+	public function __construct(Position $position)
 	{
-		$this->location = $location;
+		$this->position = $position;
 	}
 
 
 	public function isEmpty()
 	{
-		
+		$map = $this->position->getMap();
+		$space = $map->getPosition($this->position->getX(), $this->position->getY());
+
+		return is_null($space);
 	}
 
 
