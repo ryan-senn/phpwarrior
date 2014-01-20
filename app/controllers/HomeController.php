@@ -1,6 +1,6 @@
 <?php
 
-use Services\Game\Location;
+use Services\Game\Position;
 use Services\Game\Unit\Warrior;
 use Services\Game\Map;
 
@@ -17,6 +17,31 @@ class HomeController extends BaseController
 	}
 
 
+	public function mock()
+	{
+		require(storage_path() .'/Player.php');
+
+		$map = new Map(5, 5);
+
+		$position = new Position($map, 1, 2);
+		$warrior = new Warrior($position);
+
+		$position = new Position($map, 1, 2);
+		$ooze = new Ooze($position);
+
+		$map->setElement($warrior);
+
+		$player = new Player($warrior);
+
+		for($i = 0; $i < 10; $i++)
+		{
+			$player->play_turn();
+		}
+
+		return View::make('pages.home.mock');
+	}
+
+
 	public function submit()
 	{
 		$code = Input::get('code');
@@ -24,10 +49,11 @@ class HomeController extends BaseController
 		file_put_contents(storage_path() .'/Player.php', $code);
 		require(storage_path() .'/Player.php');
 
-		$location = new Location(1, 2);
-		$warrior = new Warrior($location);
-
 		$map = new Map(5, 5);
+
+		$position = new Position($map, 1, 2);
+		$warrior = new Warrior($position);
+
 		$map->setElement($warrior);
 
 		$player = new Player($warrior);
