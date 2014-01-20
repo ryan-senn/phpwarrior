@@ -14,7 +14,9 @@ class Player
 
   	public function play_turn()
   	{
-    	        Log::info('played a turn');
-                $this->warrior->feel();
+        if($this->warrior->feel()->isEmpty())
+        {
+              $this->warrior->walk();
+        }
   	}
 }
