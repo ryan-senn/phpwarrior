@@ -49,4 +49,10 @@ abstract class Unit extends Element
 	{
 		$this->direction = $direction;
 	}
+
+
+	public function __toString()
+	{
+		return get_class($this);
+	}
 }

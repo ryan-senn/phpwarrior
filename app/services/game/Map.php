@@ -10,6 +10,9 @@ class Map
 
 	public function __construct($height, $width)
 	{
+		$this->height = $height;
+		$this->width = $width;
+
 		for($h = 0; $h < $height; $h++)
 		{
 			for($w = 0; $w < $height; $w++)
@@ -42,13 +45,17 @@ class Map
 
 	public function display()
 	{
-		for($h = 0; $h < $height; $h++)
+		$html = '';
+
+		for($h = 0; $h < $this->height; $h++)
 		{
-			for($w = 0; $w < $height; $w++)
+			for($w = 0; $w < $this->width; $w++)
 			{
-				echo '[ ]';
+				$html .= '['. $this->getPosition($h, $w) .']';
 			}
-			echo '<br />';
+			$html .= '<br />';
 		}
+
+		return $html;
 	}
 }

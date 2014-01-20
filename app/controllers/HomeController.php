@@ -2,6 +2,7 @@
 
 use Services\Game\Position;
 use Services\Game\Unit\Warrior;
+use Services\Game\Unit\Ooze;
 use Services\Game\Map;
 
 
@@ -23,13 +24,15 @@ class HomeController extends BaseController
 
 		$map = new Map(5, 5);
 
-		$position = new Position($map, 1, 2);
+		$position = new Position($map, 0, 0);
 		$warrior = new Warrior($position);
-
-		$position = new Position($map, 1, 2);
-		$ooze = new Ooze($position);
-
 		$map->setElement($warrior);
+
+		$position = new Position($map, 2, 0);
+		$ooze = new Ooze($position);
+		$map->setElement($ooze);
+
+		$map1 = clone $map;
 
 		$player = new Player($warrior);
 
@@ -38,7 +41,13 @@ class HomeController extends BaseController
 			$player->play_turn();
 		}
 
-		return View::make('pages.home.mock');
+		$map2 = clone $map;
+
+		$this->layout->content = View::make('pages.home.mock', [
+			'map1' => $map1,
+			'map2' => $map2,
+			'logs' => json_encode($warrior->getLog()),
+		]);
 	}
 
 
