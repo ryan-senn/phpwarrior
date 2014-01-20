@@ -45,14 +45,8 @@ abstract class Unit extends Element
 	}
 
 
-	public function setDirection($direction)
-	{
-		$this->direction = $direction;
-	}
-
-
 	public function __toString()
 	{
-		return get_class($this);
+		return substr(strrchr(get_class($this), "\\"), 1);
 	}
 }

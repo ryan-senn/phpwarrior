@@ -16,7 +16,7 @@ class Player
   	{
         if($this->warrior->feel()->isEmpty())
         {
-              $this->warrior->walk();
+              //$this->warrior->walk();
         }
   	}
 }

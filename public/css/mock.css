@@ -1,0 +1,15 @@
+div.map {
+  display: inline-block;
+}
+div.map div.column {
+  display: inline-block;
+}
+div.map div.column div.cell {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ccc;
+  margin: 1px;
+}
+div.map div.column div.cell div.coords {
+  background-color: #ccc;
+}

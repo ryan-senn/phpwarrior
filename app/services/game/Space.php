@@ -20,7 +20,7 @@ class Space
 		$map = $this->position->getMap();
 		$space = $map->getPosition($this->position->getX(), $this->position->getY());
 
-		return is_null($space);
+		return $space instanceof Void;
 	}
 
 

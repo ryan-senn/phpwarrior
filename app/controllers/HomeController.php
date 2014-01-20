@@ -24,7 +24,7 @@ class HomeController extends BaseController
 
 		$map = new Map(5, 5);
 
-		$position = new Position($map, 0, 0);
+		$position = new Position($map, 1, 1);
 		$warrior = new Warrior($position);
 		$map->setElement($warrior);
 
@@ -32,20 +32,19 @@ class HomeController extends BaseController
 		$ooze = new Ooze($position);
 		$map->setElement($ooze);
 
-		$map1 = clone $map;
+		$maps[] = clone $map;
 
 		$player = new Player($warrior);
 
-		for($i = 0; $i < 10; $i++)
+		for($i = 0; $i < 1; $i++)
 		{
 			$player->play_turn();
+			
+			$maps[] = clone $warrior->getPosition()->getMap();
 		}
 
-		$map2 = clone $map;
-
 		$this->layout->content = View::make('pages.home.mock', [
-			'map1' => $map1,
-			'map2' => $map2,
+			'maps' => $maps,
 			'logs' => json_encode($warrior->getLog()),
 		]);
 	}

@@ -6,7 +6,6 @@ use Services\Game\Space;
 class Warrior extends Unit
 {
 
-
 	public function feel($direction = 'forward')
 	{
 		$this->addLog('warrior feels '. $direction);

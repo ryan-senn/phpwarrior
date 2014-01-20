@@ -13,7 +13,21 @@
 
 App::before(function($request)
 {
-	//
+    // compile less unless we're on production
+    if(App::environment() !== 'production')
+    {
+	    $paths = [
+            'in' => __DIR__.'/views/less/',
+            'out' => __DIR__.'/../public/css/',
+        ];
+
+        $less = new lessc;
+
+        foreach(glob($paths['in'] .'*.less') as $filename)
+        {
+            $less->checkedCompile($filename, $paths['out'] . basename($filename, '.less').'.css');
+        }
+    }
 });
 
 

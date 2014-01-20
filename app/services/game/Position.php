@@ -18,7 +18,7 @@ class Position
 		$this->map = $map;
 		$this->coords = ['x' => $x, 'y' => $y];
 
-		$this->direction = is_null($direction) ? $this->directions['absolute'][0] : $direction;
+		$this->direction = is_null($direction) ? $this->directions['absolute'][2] : $direction;
 	}
 
 
@@ -50,8 +50,10 @@ class Position
 	{
 		$position = $this->getRelativeTo($direction);
 
-		$this->x = $position->getX();
-		$this->y = $position->getY();
+		$this->coords['x'] = $position->getX();
+		$this->coords['y'] = $position->getY();
+
+		$this->map->moveElement();
 	}
 
 
@@ -66,16 +68,16 @@ class Position
 				switch($direction)
 				{
 					case 'forward':
-						$x += 1;
-						break;
-					case 'backward':
-						$x -= 1;
-						break;
-					case 'right':
 						$y += 1;
 						break;
-					case 'left':
+					case 'backward':
 						$y -= 1;
+						break;
+					case 'right':
+						$x += 1;
+						break;
+					case 'left':
+						$x -= 1;
 						break;
 				}
 				break;
@@ -83,16 +85,16 @@ class Position
 				switch($direction)
 				{
 					case 'forward':
-						$x -= 1;
+						$y += 1;
 						break;
 					case 'backward':
-						$x += 1;
-						break;
-					case 'right':
 						$y -= 1;
 						break;
+					case 'right':
+						$x -= 1;
+						break;
 					case 'left':
-						$y += 1;
+						$x += 1;
 						break;
 				}
 				break;
@@ -100,16 +102,16 @@ class Position
 				switch($direction)
 				{
 					case 'forward':
-						$y += 1;
-						break;
-					case 'backward':
-						$y -= 1;
-						break;
-					case 'right':
 						$x += 1;
 						break;
-					case 'left':
+					case 'backward':
 						$x -= 1;
+						break;
+					case 'right':
+						$y += 1;
+						break;
+					case 'left':
+						$y -= 1;
 						break;
 				}
 				break;
@@ -117,16 +119,16 @@ class Position
 				switch($direction)
 				{
 					case 'forward':
-						$y -= 1;
-						break;
-					case 'backward':
-						$y += 1;
-						break;
-					case 'right':
 						$x -= 1;
 						break;
-					case 'left':
+					case 'backward':
 						$x += 1;
+						break;
+					case 'right':
+						$y -= 1;
+						break;
+					case 'left':
+						$y += 1;
 						break;
 				}
 			break;

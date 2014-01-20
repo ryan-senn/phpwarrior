@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>PHP Warrior</title>
+	@section('head')
+
+	@show
 </head>
 <body>
 

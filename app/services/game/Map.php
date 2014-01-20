@@ -13,11 +13,12 @@ class Map
 		$this->height = $height;
 		$this->width = $width;
 
-		for($h = 0; $h < $height; $h++)
+		for($x = 0; $x < $width; $x++)
 		{
-			for($w = 0; $w < $height; $w++)
+			for($y = 0; $y < $height; $y++)
 			{
-				$this->elements[$h][$w] = null;
+				$position = new Position($this, $x, $y);
+				$this->elements[$x][$y] = new Void($position);
 			}
 		}
 	}
@@ -31,6 +32,12 @@ class Map
 	}
 
 
+	public function moveElement(Element $element)
+	{
+		
+	}
+
+
 	public function getElements()
 	{
 		return $this->elements;
@@ -40,22 +47,5 @@ class Map
 	public function getPosition($x, $y)
 	{
 		return $this->elements[$x][$y];
-	}
-
-
-	public function display()
-	{
-		$html = '';
-
-		for($h = 0; $h < $this->height; $h++)
-		{
-			for($w = 0; $w < $this->width; $w++)
-			{
-				$html .= '['. $this->getPosition($h, $w) .']';
-			}
-			$html .= '<br />';
-		}
-
-		return $html;
 	}
 }
