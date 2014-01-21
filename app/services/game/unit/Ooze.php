@@ -1,7 +1,30 @@
 <?php namespace Services\Game\Unit;
 
+use Services\Game\Position;
+
 
 class Ooze extends Unit
 {
 
+	const NAME = 'Ooze';
+
+	protected $health = 10;
+	protected $attack = 2;
+
+
+	public function playTurn()
+	{
+		foreach(Position::getDirections()['relative'] as $direction)
+		{
+			$space = $this->feel($direction);
+
+			if($space->isPlayer())
+			{
+				$this->attack($direction);
+				return;
+			}
+		}
+
+		self::addLog('does nothing');
+	}
 }

@@ -27,6 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'ryan' => array('ubuntu'),
+	'scotch' => array('scotch'),
 
 ));
 

@@ -1,7 +1,6 @@
 <?php
 
 use Services\Game\Position;
-use Services\Game\Unit\Warrior;
 use Services\Game\Unit\Ooze;
 use Services\Game\Map;
 
@@ -20,32 +19,35 @@ class HomeController extends BaseController
 
 	public function mock()
 	{
-		require(storage_path() .'/Player.php');
+		require(storage_path() .'/Warrior.php');
 
 		$map = new Map(5, 5);
 
-		$position = new Position($map, 1, 1);
-		$warrior = new Warrior($position);
-		$map->setElement($warrior);
-
-		$position = new Position($map, 2, 0);
-		$ooze = new Ooze($position);
-		$map->setElement($ooze);
-
 		$maps[] = clone $map;
 
-		$player = new Player($warrior);
+		$position = new Position($map, 1, 0);
+		$warrior = new Warrior($position);
+		$map->addUnit($warrior);
 
-		for($i = 0; $i < 1; $i++)
+		$position = new Position($map, 1, 4);
+		$ooze = new Ooze($position);
+		$map->addUnit($ooze);
+		
+		$maps[] = clone $map;
+
+		for($turn = 0; $turn < 7; $turn++)
 		{
-			$player->play_turn();
-			
-			$maps[] = clone $warrior->getPosition()->getMap();
+			foreach($map->getUnits() as $unit)
+			{
+				$unit->playTurn();
+			}
+
+			$maps[] = clone $map;
 		}
 
 		$this->layout->content = View::make('pages.home.mock', [
 			'maps' => $maps,
-			'logs' => json_encode($warrior->getLog()),
+			'logs' => $warrior->getLogs(),
 		]);
 	}
 
@@ -72,31 +74,5 @@ class HomeController extends BaseController
 		}
 
 		return Response::json(json_encode($warrior->getLog()));
-		//return Response::json(json_encode($map));
 	}
 }
-
-/*
-
-<?php
-
-class Player
-{
-
-	protected $warrior;
-
-
-	public function __construct($warrior)
-	{
-		$this->warrior = $warrior;
-	}
-	
-
-  	public function play_turn()
-  	{
-    	Log::info('played a turn');
-    	$this->warrior->feel();
-  	}
-}
-
-*/

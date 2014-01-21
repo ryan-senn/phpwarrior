@@ -1,52 +1,147 @@
 <?php namespace Services\Game\Unit;
 
-use Services\Game\Element;
 use Services\Game\Position;
 
 
-abstract class Unit extends Element
+abstract class Unit
 {
 	
-	protected $health = 20;
+	protected $health = 1;
 	protected $attack = 1;
 
-	protected $log = [];
+	protected $position;
 
-	protected $direction = 'east';
+	protected static $logs;
 
 
-	public function attack()
+	public function __construct(Position $position)
 	{
-		$this->addLog('unit attacks');
+		$this->position = $position;
 	}
 
 
-	protected function loseHealth($number)
+	public function getX()
 	{
-		$this->health -= $number;
+		return $this->position->getX();
 	}
 
 
-	protected function gainHealth($number)
+	public function getY()
 	{
-		$this->health += $number;
+		return $this->position->getY();
 	}
 
 
-	protected function addLog($message)
+	public function setPosition(Position $position = null)
 	{
-		$this->log[] = $message;
+		$this->position = $position;
 	}
 
 
-	public function getLog()
+	public function getPosition()
 	{
-		return $this->log;
+		return $this->position;
+	}
+
+
+	public function feel($direction = 'forward')
+	{
+		$this->addLog('feels '. $direction);
+
+		return $this->getSpace($direction);
+	}
+
+
+	public function attack($direction = 'forward')
+	{
+		$receiver = $this->getUnit($direction);
+
+		if($receiver)
+		{
+			$this->damage($receiver);
+
+			if(!$receiver->isAlive())
+			{
+				self::addLog('killed '. $receiver::NAME);
+
+				$receiver->setPosition(null);
+			}
+		}
+		else
+		{
+			self::addLog('attacks and hits nothing');
+		}
+	}
+
+
+	protected function damage(Unit $receiver)
+	{
+		$receiver->loseHealth($this->attack);
+
+		self::addLog('attacks '. $receiver::NAME .', causing '. $this->attack .' damage. '. $receiver::NAME .' is down to '. $receiver->health .' health');
+	}
+
+
+	protected function loseHealth($amount)
+	{
+		$this->health -= $amount;
+	}
+
+
+	public function isAlive()
+	{
+		return $this->health > 0;
+	}
+
+
+    protected function getUnit($direction, $forward = 1, $right = 0)
+    {
+    	return $this->getSpace($direction, $forward, $right)->getUnit();
+    }
+
+
+	protected function getSpace($direction, $forward = 1, $right = 0)
+	{
+		$offset = $this->getOffset($direction, $forward, $right);
+
+		return $this->position->getRelativeSpace($offset['x'], $offset['y']);
+	}
+
+
+	protected function getOffset($direction, $forward = 1, $right = 0)
+	{
+		switch($direction)
+		{
+			case 'forward':
+				return ['x' => $forward, 'y' => -$right];
+				break;
+			case 'backward':
+				return ['x' => -$forward, 'y' => $right];
+				break;
+			case 'right':
+				return ['x' => $right, 'y' => $forward];
+				break;
+			case 'left':
+				return ['x' => -$right, 'y' => -$forward];
+				break;
+		}
+	}
+
+
+	protected static function addLog($message)
+	{
+		self::$logs[] = static::NAME .' '. $message;
+	}
+
+
+	public static function getLogs()
+	{
+		return self::$logs;
 	}
 
 
 	public function __toString()
 	{
-		return substr(strrchr(get_class($this), "\\"), 1);
+		return static::NAME;
 	}
 }

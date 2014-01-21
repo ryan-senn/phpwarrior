@@ -6,25 +6,32 @@ use Services\Game\Space;
 class Warrior extends Unit
 {
 
-	public function feel($direction = 'forward')
-	{
-		$this->addLog('warrior feels '. $direction);
+	const NAME = 'Warrior';
 
-		return new Space($this->position->getRelativeTo($direction));
-	}
+	protected $health = 20;
+	protected $attack = 3;
 
 
 	public function walk($direction = 'forward')
 	{
-		$this->addLog('warrior walks '. $direction);
+		self::addLog('walks '. $direction);
 
-		$this->position->move($direction);
+		if($this->getSpace($direction)->isEmpty())
+		{
+			$offset = $this->getOffset($direction);
+
+			$this->position->move($offset['x'], $offset['y']);
+		}
+		else
+		{
+			self::addLog('bumps into '. $this->getSpace($direction)->getUnit());
+		}
 	}
 
 
 	public function rest()
 	{
-		$this->addLog('warrior rests');
+		self::addLog('rests');
 
 		$this->gainHealth(2);
 	}

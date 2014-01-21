@@ -26,12 +26,10 @@ class Position
 class Space
 {
 	def initialize(floor, x, y)
-      @floor, 
-      @x, 
-      @y = floor, 
-      x, 
-      y
-    end
+      @floor = floor, 
+      @x = x, 
+      @y = y,
+  end
 }
 
 

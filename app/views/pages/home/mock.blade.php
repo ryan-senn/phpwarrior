@@ -9,24 +9,30 @@
 
 @foreach($maps as $key => $map)
 
-	<h1>{{ $key }}</h1>
+	<p>{{ $key }}</p>
 	<div class="map">
-		@foreach($map->getElements() as $x)
+		@for($x = 0; $x < $map->getWidth(); $x++)
 		<div class="column">
-			@foreach(array_reverse($x) as $element)
+			@for($y = $map->getHeight() -1; $y >= 0; $y--)
 				<div class="cell">
-					<div class="coords">{{ $element->getPosition()->getX() }}/{{ $element->getPosition()->getY() }}</div>
-					<div class="element">{{ $element }}</div>
+					<div class="coords">{{ $x }}/{{ $y }}</div>
+					<div class="element">{{ $map->getUnit($x, $y) }}</div>
 				</div>
-			@endforeach
+			@endfor
 		</div>
-		@endforeach
+		@endfor
 	</div>
 
 @endforeach
 
 <br />
 
-{{ $logs }}
+<ul>
+@foreach($logs as $log)
+
+	<li>{{ $log }}</li>
+
+@endforeach
+</ul>
 
 @stop

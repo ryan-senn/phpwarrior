@@ -7,9 +7,12 @@ div.map div.column {
 div.map div.column div.cell {
   width: 60px;
   height: 60px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   margin: 1px;
 }
 div.map div.column div.cell div.coords {
-  background-color: #ccc;
+  background-color: #ddd;
+}
+div.map div.column div.cell span.void {
+  color: #ddd;
 }
