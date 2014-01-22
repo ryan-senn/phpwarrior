@@ -16,7 +16,13 @@
 			@for($y = $map->getHeight() -1; $y >= 0; $y--)
 				<div class="cell">
 					<div class="coords">{{ $x }}/{{ $y }}</div>
-					<div class="element">{{ $map->getUnit($x, $y) }}</div>
+					<div class="element">
+						@if($map->getStairsLocation()['x'] == $x && $map->getStairsLocation()['y'] == $y)
+							stairs
+						@else
+							{{ $map->getUnit($x, $y) }}
+						@endif
+					</div>
 				</div>
 			@endfor
 		</div>

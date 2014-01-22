@@ -22,17 +22,23 @@ class Warrior extends Unit
 
 			$this->position->move($offset['x'], $offset['y']);
 		}
-		else
+		elseif($this->getSpace($direction)->isWall())
+		{
+			self::addLog('bumps into a wall');
+		}
+		elseif(($this->getSpace($direction)->isEnnemy()))
 		{
 			self::addLog('bumps into '. $this->getSpace($direction)->getUnit());
 		}
+
+		self::addLog('position is '. $this->getPosition());
 	}
 
 
 	public function rest()
 	{
-		self::addLog('rests');
-
 		$this->gainHealth(2);
+
+		self::addLog('rests and gains 2 health. He is back to '. $this->health .' health.');
 	}
 }

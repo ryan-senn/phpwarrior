@@ -9,7 +9,7 @@ class Ooze extends Unit
 	const NAME = 'Ooze';
 
 	protected $health = 10;
-	protected $attack = 2;
+	protected $attack = 3;
 
 
 	public function playTurn()
@@ -25,6 +25,6 @@ class Ooze extends Unit
 			}
 		}
 
-		self::addLog('does nothing');
+		//self::addLog('does nothing');
 	}
 }

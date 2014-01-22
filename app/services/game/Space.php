@@ -51,7 +51,7 @@ class Space
 
 	public function isEnnemy()
 	{
-		return !$this->isPlayer();
+		return !$this->isPlayer() && !$this->isWall();
 	}
 
 

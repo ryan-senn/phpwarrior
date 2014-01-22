@@ -40,13 +40,19 @@ class Map
 
 	public function placeStairs($x, $y)
 	{
-		$this->stairs_location = [$x, $y];
+		$this->stairs_location = ['x' => $x, 'y' => $y];
 	}
 
 
 	public function getStairsSpace()
 	{
-		return $this->space($this->stairs_location['x'], $this->stairs_location['y']);
+		return $this->getSpace($this->stairs_location['x'], $this->stairs_location['y']);
+	}
+
+
+	public function getStairsLocation()
+	{
+		return $this->stairs_location;
 	}
 
 
@@ -90,7 +96,7 @@ class Map
 
 	public function isOut($x, $y)
 	{
-		return $x < 0 || $x > $this->width || $y < 0 || $y > $this->height;
+		return $x <= 0 || $x >= $this->width || $y <= 0 || $y >= $this->height;
 	}
 
 

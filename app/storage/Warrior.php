@@ -6,17 +6,27 @@ use Services\Game\Unit\Warrior as BaseWarrior;
 class Warrior extends BaseWarrior
 {
 
+
     public function playTurn()
     {
-        $space = $this->feel();
+        $direction = $this->position->getRelativeDirectionOfStairs();
 
-        if($space->isEmpty())
+        $space = $this->feel($direction);
+        
+        if($space->isEmpty($direction))
         {
-            $this->walk();
+            if($this->health < 20)
+            {
+                $this->rest();
+            }
+            else
+            {
+                $this->walk($direction);
+            }
         }
-        elseif($space->isEnnemy())
+        else
         {
-            $this->attack();
+            $this->attack($direction);
         }
     }
 }

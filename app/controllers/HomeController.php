@@ -2,6 +2,7 @@
 
 use Services\Game\Position;
 use Services\Game\Unit\Ooze;
+use Services\Game\Unit\Unit;
 use Services\Game\Map;
 
 
@@ -22,27 +23,48 @@ class HomeController extends BaseController
 		require(storage_path() .'/Warrior.php');
 
 		$map = new Map(5, 5);
+		$map->placeStairs(3, 2);
 
-		$maps[] = clone $map;
-
-		$position = new Position($map, 1, 0);
+		$position = new Position($map, 2, 0);
 		$warrior = new Warrior($position);
 		$map->addUnit($warrior);
 
-		$position = new Position($map, 1, 4);
+		$position = new Position($map, 2, 4);
 		$ooze = new Ooze($position);
 		$map->addUnit($ooze);
 		
-		$maps[] = clone $map;
+		$position = new Position($map, 2, 3);
+		$ooze = new Ooze($position);
+		$map->addUnit($ooze);
+		
+		$position = new Position($map, 2, 2);
+		$ooze = new Ooze($position);
+		$map->addUnit($ooze);
 
-		for($turn = 0; $turn < 7; $turn++)
+		for($turn = 0; $turn < 1000; $turn++)
 		{
-			foreach($map->getUnits() as $unit)
+			if(!$warrior->isAlive())
 			{
-				$unit->playTurn();
+				$warrior::addLog('lost the game');
+				break;
+			}
+
+			if($warrior->getPosition()->isAt($map->getStairsLocation()['x'], $map->getStairsLocation()['y']))
+			{
+				$warrior::addLog('won the game');
+				break;
 			}
 
 			$maps[] = clone $map;
+
+			foreach($map->getUnits() as $unit)
+			{
+				// play this units turn if it's not dead
+				if(!is_null($unit->getPosition()))
+				{
+					$unit->playTurn();
+				}
+			}
 		}
 
 		$this->layout->content = View::make('pages.home.mock', [

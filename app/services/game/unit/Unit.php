@@ -26,6 +26,12 @@ abstract class Unit
 	}
 
 
+	public function getHealth()
+	{
+		return $this->health;
+	}
+
+
 	public function getY()
 	{
 		return $this->position->getY();
@@ -44,9 +50,19 @@ abstract class Unit
 	}
 
 
+	public function isWarrior()
+	{
+		return $this::NAME == 'Warrior';
+	}
+
+
 	public function feel($direction = 'forward')
 	{
-		$this->addLog('feels '. $direction);
+		// only log warriors senses
+		if($this->isWarrior())
+		{
+			$this->addLog('feels '. $direction);
+		}
 
 		return $this->getSpace($direction);
 	}
@@ -54,9 +70,13 @@ abstract class Unit
 
 	public function attack($direction = 'forward')
 	{
-		$receiver = $this->getUnit($direction);
+		$space = $this->getSpace($direction);
 
-		if($receiver)
+		if($space->isWall())
+		{
+			self::addLog('attacks and hits a wall');
+		}
+		elseif($receiver = $space->getUnit())
 		{
 			$this->damage($receiver);
 
@@ -85,6 +105,12 @@ abstract class Unit
 	protected function loseHealth($amount)
 	{
 		$this->health -= $amount;
+	}
+
+
+	protected function gainHealth($amount)
+	{
+		$this->health += $amount;
 	}
 
 
@@ -128,7 +154,7 @@ abstract class Unit
 	}
 
 
-	protected static function addLog($message)
+	public static function addLog($message)
 	{
 		self::$logs[] = static::NAME .' '. $message;
 	}

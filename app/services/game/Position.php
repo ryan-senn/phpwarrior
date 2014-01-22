@@ -163,4 +163,10 @@ class Position
 				break;
 		}
 	}
+
+
+	public function __toString()
+	{
+		return $this->getX() .'/'. $this->getY();
+	}
 }
