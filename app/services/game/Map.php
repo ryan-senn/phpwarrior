@@ -1,7 +1,7 @@
 <?php namespace Services\Game;
 
-use Services\Game\Unit\Unit;
-use Services\Game\Unit\Warrior;
+use Services\Game\Units\Unit;
+use Services\Game\Units\Warrior;
 
 
 class Map
@@ -71,6 +71,18 @@ class Map
 		{
 			return $unit instanceof Warrior;
 		});
+	}
+
+
+	public function getWarrior()
+	{
+		foreach($this->getUnits() as $unit)
+		{
+			if($unit instanceof Warrior)
+			{
+				return $unit;
+			}
+		}
 	}
 
 

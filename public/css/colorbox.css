@@ -1,0 +1,12 @@
+div#colorbox html {
+  font-family: "Atlas Grotesk Web", sans-serif;
+  color: #333;
+  font-size: 12pt;
+  background-color: #eee;
+  height: 100%;
+}
+div#colorbox body {
+  margin: 0;
+  padding: 0;
+  width: 800px;
+}

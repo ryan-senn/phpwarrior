@@ -1,6 +1,6 @@
 <?php namespace Services\Game;
 
-use Services\Game\Unit\Warrior;
+use Services\Game\Units\Warrior;
 
 
 class Space

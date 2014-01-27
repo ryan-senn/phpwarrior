@@ -1,11 +1,9 @@
 <?php
 
-use Services\Game\Unit\Warrior as BaseWarrior;
-
+use Services\Game\Units\Warrior as BaseWarrior;
 
 class Warrior extends BaseWarrior
 {
-
 
     public function playTurn()
     {

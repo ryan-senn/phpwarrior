@@ -1,16 +1,16 @@
 <?php
 
 Route::get('/', [
-	'as' => 'home.index',
-	'uses' => 'HomeController@index',
+	'as' => 'game.index',
+	'uses' => 'GameController@index',
 ]);
 
-Route::get('/mock', [
-	'as' => 'home.mock',
-	'uses' => 'HomeController@mock',
-]);
-
-Route::post('/game', [
+Route::post('/submit', [
 	'as' => 'game.submit',
-	'uses' => 'HomeController@submit',
+	'uses' => 'GameController@submit',
+]);
+
+Route::get('/simulate', [
+	'as' => 'game.simulate',
+	'uses' => 'GameController@simulate',
 ]);
