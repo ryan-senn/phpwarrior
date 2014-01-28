@@ -18,4 +18,10 @@ class Potion extends Item
 	{
 		$this->charges -= 1;
 	}
+
+
+	public function getRegeneration()
+	{
+		return $this->regeneration;
+	}
 }

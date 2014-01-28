@@ -8,9 +8,9 @@
 			@for($x = 0; $x < $map->getWidth(); $x++)
 			<td>
 				@if($map->getStairsLocation()['x'] == $x && $map->getStairsLocation()['y'] == $y)
-					<img src="/images/stairs.jpg" />
+					<img src="/images/stairs.jpg" alt="stairs" />
 				@elseif($map->getUnit($x, $y) instanceof Services\Game\Units\Unit)
-					<img src="/images/{{ strtolower($map->getUnit($x, $y)) }}.jpg" />
+					<img src="/images/{{ strtolower($map->getUnit($x, $y)) }}.jpg" alt="{{ strtolower($map->getUnit($x, $y)) }}" />
 				@endif
 			</td>
 			@endfor

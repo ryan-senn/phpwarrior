@@ -11,7 +11,7 @@
 
 <div id="header">
 	<div class="content">
-		<h1>PHP Warrior</h1>
+		<h1>PHP Manual</h1>
 	</div>
 </div>
 

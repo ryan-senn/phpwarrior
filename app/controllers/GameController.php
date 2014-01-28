@@ -8,6 +8,7 @@ use Services\Game\Events;
 use Services\Game\Event;
 use Services\Game\Maps\map_1;
 use Services\Game\Maps\map_2;
+use Services\Game\Maps\map_3;
 
 
 class GameController extends BaseController
@@ -18,7 +19,7 @@ class GameController extends BaseController
 
 	public function index()
 	{
-		$map = map_2::get();
+		$map = map_3::get();
 
 		$this->layout->content = View::make('pages.game.index', [
 			'code' => htmlspecialchars(file_get_contents(storage_path() .'/Player.php')),
@@ -38,7 +39,7 @@ class GameController extends BaseController
 
 	public function simulate()
 	{
-		$map = map_2::get();
+		$map = map_3::get();
 		$warrior = $map->getWarrior();
 		
 		$maps[] = clone $map;
