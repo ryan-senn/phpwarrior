@@ -1,5 +1,6 @@
 <?php namespace Services\Game;
 
+
 class Position
 {
 
@@ -53,6 +54,27 @@ class Position
 	}
 
 
+	public function getRelativeDirectionOfStairs()
+	{
+		$location = $this->map->getStairsLocation();
+
+		$x = $this->x - $location['x'];
+		$y = $this->y - $location['y'];
+
+		if(abs($x) > abs($y))
+		{
+			if($x > 0)
+			{
+				return '';
+			}
+		}
+		else
+		{
+
+		}
+	}
+
+
 	public function getSpace()
 	{
 		return $this->map->getSpace($this->x, $this->y);
@@ -61,32 +83,45 @@ class Position
 
 	public function move($direction)
 	{
-		$rotation = array_search($direction, self::$directions['relative']);
+		$relative_direction = $this->getAbsoluteDirection($direction);
 
-		$this->direction_index += $rotation;
+		// update the direction
+		$this->direction_index = array_search($relative_direction, self::$directions['absolute']);
 
-		if($this->direction_index > 3)
-		{
-			$this->direction_index -= 4;
-		}
-
-		switch(self::$directions['absolute'][$this->direction_index])
+		// update the position
+		switch($relative_direction)
 		{
 			case 'north':
-				$this->x += 1;
-				break;
-			case 'east':
 				$this->y += 1;
 				break;
+			case 'east':
+				$this->x += 1;
+				break;
 			case 'south':
-				$this->x -= 1;
+				$this->y -= 1;
 				break;
 			case 'west':
-				$this->y -= 1;
+				$this->x -= 1;
 				break;
 			default:
 				throw new \Exception('Invalid direction');
 		}
+	}
+
+
+	public function getAbsoluteDirection($direction)
+	{
+		$rotation = array_search($direction, self::$directions['relative']);
+
+		$direction = $this->direction_index;
+		$direction += $rotation;
+
+		if($direction > 3)
+		{
+			$direction -= 4;
+		}
+
+		return self::$directions['absolute'][$direction];
 	}
 
 

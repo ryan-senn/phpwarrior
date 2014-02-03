@@ -14,21 +14,25 @@ class PositionTest extends TestCase
 		$this->position = new Position($this->map, 1, 2, 'north');
 	}
 
+
 	public function teardown()
 	{
 		$this->map = null;
 		$this->position = null;
 	}
 
+
 	public function testX()
 	{
 		$this->assertEquals('1', $this->position->getX());
 	}
 
+
 	public function testY()
 	{
 		$this->assertEquals('1', $this->position->getX());
 	}
+
 
 	public function testIsAt()
 	{
@@ -36,24 +40,45 @@ class PositionTest extends TestCase
 		$this->assertFalse($this->position->isAt(2, 3));
 	}
 
+
 	public function testDirection()
 	{
 		$this->assertEquals('north', $this->position->getDirection());
 	}
 
-	public function testMoveBackwards()
+
+	public function testMoveBackward()
 	{
 		$this->position->move('backward');
 
 		$this->assertEquals('south', $this->position->getDirection());
-		$this->assertEquals(0, $this->position->getX());
+		$this->assertEquals(1, $this->position->getY());
 	}
+
 
 	public function testMoveRight()
 	{
 		$this->position->move('right');
 
 		$this->assertEquals('east', $this->position->getDirection());
+		$this->assertEquals(2, $this->position->getX());
+	}
+
+
+	public function testMoveForward()
+	{
+		$this->position->move('forward');
+
+		$this->assertEquals('north', $this->position->getDirection());
 		$this->assertEquals(3, $this->position->getY());
+	}
+
+
+	public function testMoveLeft()
+	{
+		$this->position->move('left');
+
+		$this->assertEquals('west', $this->position->getDirection());
+		$this->assertEquals(0, $this->position->getX());
 	}
 }
