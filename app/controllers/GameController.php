@@ -24,7 +24,8 @@ class GameController extends BaseController
 		$this->layout->content = View::make('pages.game.index', [
 			'code' => htmlspecialchars(file_get_contents(storage_path() .'/Player.php')),
 			'map' => $map,
-			'skills' => $map->getWarrior()->getSkills(),
+			'skills' => map_3::getSkills(),
+			'helpers' => map_3::getHelpers(),
 		]);
 	}
 
@@ -74,6 +75,7 @@ class GameController extends BaseController
 				if(!is_null($unit->getPosition()))
 				{
 					$unit->playTurn();
+					$unit->endTurn();
 				}
 			}
 
@@ -88,6 +90,8 @@ class GameController extends BaseController
 		$this->layout->content = View::make('pages.game.simulate', [
 			'maps' => $maps,
 			'events' => Events::all(),
+			'skills' => map_3::getSkills(),
+			'helpers' => map_3::getHelpers(),
 		]);
 	}
 }

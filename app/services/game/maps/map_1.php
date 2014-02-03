@@ -1,13 +1,20 @@
 <?php namespace Services\Game\Maps;
 
+use Services\Game\Maps\Map as BaseMap;
 use Services\Game\Map;
 use Services\Game\Position;
 
 
-class map_1
+class map_1 extends BaseMap
 {
 
-	private $skills = ['walk'];
+	protected static $description = 'Make your way to the stairs using your skills. There are helpers provided to... help.';
+
+	protected static $skills = ['walk'];
+
+	protected static $helpers = [
+		'$this->position->getRelativeDirectionOfStairs();',
+	];
 
 
 	public static function get()
@@ -19,6 +26,7 @@ class map_1
 
 		$position = new Position($map, 1, 0);
 		$warrior = new \Warrior($position);
+		$warrior->setSkills(self::$skills);
 		$map->addUnit($warrior);
 
 		return $map;

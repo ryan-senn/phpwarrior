@@ -1,6 +1,7 @@
 <?php namespace Services\Game\Units;
 
 use Services\Game\Space;
+use Services\Game\Items\Potion;
 
 
 class Warrior extends Unit
@@ -10,4 +11,18 @@ class Warrior extends Unit
 
 	protected $health = 20;
 	protected $attack = 3;
+
+	protected $potion;
+
+
+	public function setPotion(Potion $potion)
+	{
+		$this->potion = $potion;
+	}
+
+
+	public function getPotion()
+	{
+		return $this->potion;
+	}
 }

@@ -1,14 +1,19 @@
 <?php namespace Services\Game\Maps;
 
+use Services\Game\Maps\Map as BaseMap;
 use Services\Game\Map;
 use Services\Game\Position;
 use Services\Game\Units\Ooze;
 
 
-class map_2
+class map_2 extends BaseMap
 {
 
-	private static $skills = ['walk', 'attack'];
+	protected static $skills = ['walk', 'attack'];
+
+	protected static $helpers = [
+		'$this->position->getRelativeDirectionOfStairs();',
+	];
 
 
 	public static function get()

@@ -14,7 +14,7 @@ class Position
 	];
 
 	
-	public function __construct(Map $map, $x, $y, $direction = 'south')
+	public function __construct(Map $map, $x, $y, $direction = 'north')
 	{
 		$this->map = $map;
 		$this->x = $x;
@@ -53,114 +53,39 @@ class Position
 	}
 
 
-	public function rotate($amount)
+	public function getSpace()
 	{
-		$this->direction_index += $amount;
+		return $this->map->getSpace($this->x, $this->y);
+	}
+
+
+	public function move($direction)
+	{
+		$rotation = array_search($direction, self::$directions['relative']);
+
+		$this->direction_index += $rotation;
 
 		if($this->direction_index > 3)
 		{
 			$this->direction_index -= 4;
 		}
 
-		if($this->direction_index < 0)
-		{
-			$this->direction_index += 4;
-		}
-	}
-
-
-	public function getRelativeSpace($forward, $right = 0)
-	{
-		$offset = $this->translateOffset($forward, $right);
-
-		return $this->map->getSpace($offset['x'], $offset['y']);
-	}
-
-
-	public function getSpace()
-	{
-		return $this->map->space($this->x, $this->y);
-	}
-
-
-	public function move($forward, $right = 0)
-	{
-		$offset = $this->translateOffset($forward, $right);
-
-		$this->x = $offset['x'];
-		$this->y = $offset['y'];
-	}
-
-
-	public function getDistanceFromStairs()
-	{
-		return $this->distanceOf($this->map->getStairsSpace());
-	}
-
-
-	public function getDistanceOf(Space $space)
-	{
-		return abs($this->x - $space->getX()) + abs($this->y - $space->getY());
-	}
-
-
-	public function getRelativeDirectionOfStairs()
-	{
-		return $this->getRelativeDirectionOf($this->map->getStairsSpace());
-	}
-
-
-	public function getRelativeDirectionOf(Space $space)
-	{
-		return $this->getRelativeDirection($this->getDirectionOf($space));
-	}
-
-    
-    public function getDirectionOf(Space $space)
-    {
-    	if(abs($this->x - $space->getX()) > abs($this->y - $space->getY()))
-    	{
-    		return $space->getX() > $this->x ? 'east' : 'west';
-    	}
-
-    	return $space->getY() > $this->y ? 'south' : 'north';
-    }
-
-    
-    public function getRelativeDirection($direction)
-    {
-    	$offset = array_search($direction, self::$directions['absolute']) - $this->direction_index;
-
-		if($offset > 3)
-		{
-			$offset -= 4;
-		}
-
-		if($offset < 0)
-		{
-			$offset += 4;
-		}
-
-		return self::$directions['relative'][$offset];
-    }
-
-
-	public function translateOffset($forward, $right)
-	{
-		switch($this->getDirection())
+		switch(self::$directions['absolute'][$this->direction_index])
 		{
 			case 'north':
-				return ['x' => $this->x + $right, 'y' => $this->y - $forward];
+				$this->x += 1;
 				break;
 			case 'east':
-				return ['x' => $this->x + $forward, 'y' => $this->y + $right];
+				$this->y += 1;
 				break;
 			case 'south':
-				return ['x' => $this->x - $right, 'y' => $this->y + $forward];
+				$this->x -= 1;
 				break;
 			case 'west':
-				return ['x' => $this->x - $forward, 'y' => $this->y - $right];
+				$this->y -= 1;
 				break;
+			default:
+				throw new \Exception('Invalid direction');
 		}
 	}
 

@@ -22,19 +22,6 @@ a.button {
   border-radius: 3px;
   border: 1px solid #ccc;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-table th {
-  text-align: left;
-  background-color: #eee;
-}
-table th,
-table td {
-  border: 1px solid #ccc;
-  padding: 3px 5px;
-}
 h1,
 h2,
 h3 {
@@ -55,17 +42,6 @@ ul li {
 th {
   font-weight: normal;
 }
-label {
-  display: inline-block;
-  min-width: 150px;
-}
-select {
-  width: 190px;
-}
-input {
-  padding: 3px 5px;
-  width: 180px;
-}
 #header {
   background-color: #fafaf7;
   margin: 0;
@@ -78,7 +54,7 @@ input {
   box-shadow: inset 1px 4px 6px -6px #777770;
 }
 .content {
-  width: 960px;
+  width: 1280px;
   margin: 0 auto;
 }
 .shadow-line {

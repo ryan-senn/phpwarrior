@@ -8,6 +8,13 @@ class Potion extends Item
 	protected $regeneration = 2;
 
 
+	public function __construct($charges, $regeneration)
+	{
+		$this->charges = $charges;
+		$this->regeneration = $regeneration;
+	}
+
+
 	public function isEmpty()
 	{
 		return $this->charges <= 0;
@@ -23,5 +30,11 @@ class Potion extends Item
 	public function getRegeneration()
 	{
 		return $this->regeneration;
+	}
+
+
+	public function getCharges()
+	{
+		return $this->charges;
 	}
 }

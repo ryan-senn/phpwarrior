@@ -15,6 +15,8 @@ abstract class Unit
 
 	protected $skills = ['attack'];
 
+	protected $usedSkill = false;
+
 
 	public function __construct(Position $position)
 	{
@@ -34,11 +36,23 @@ abstract class Unit
 	}
 
 
+	public function endTurn()
+	{
+		$this->usedSkill = false;
+	}
+
+
 	public function __call($method, $arguments)
 	{
 		if(!in_array($method, $this->getSkills()))
 		{
 			throw new \Exception('Unit '. static::NAME .' doesnt have skill '. $method);
+		}
+
+		if($this->usedSkill)
+		{
+			$this->addEvent('already used a skill this turn and can\'t '. $method);
+			return;
 		}
 
 		$name = 'Services\Game\Skills\\'. ucfirst($method);
@@ -54,6 +68,8 @@ abstract class Unit
 		{
 			$skill->execute();
 		}
+
+		$this->usedSkill = true;
 	}
 
 
@@ -131,37 +147,15 @@ abstract class Unit
 	}
 
 
-    public function getUnit($direction, $forward = 1, $right = 0)
+    public function getUnit($direction)
     {
-    	return $this->getSpace($direction, $forward, $right)->getUnit();
+    	return $this->getSpace($direction)->getUnit();
     }
 
 
-	public function getSpace($direction, $forward = 1, $right = 0)
+	public function getSpace($direction)
 	{
-		$offset = $this->getOffset($direction, $forward, $right);
-
-		return $this->position->getRelativeSpace($offset['x'], $offset['y']);
-	}
-
-
-	public function getOffset($direction, $forward = 1, $right = 0)
-	{
-		switch($direction)
-		{
-			case 'forward':
-				return ['x' => $forward, 'y' => -$right];
-				break;
-			case 'backward':
-				return ['x' => -$forward, 'y' => $right];
-				break;
-			case 'right':
-				return ['x' => $right, 'y' => $forward];
-				break;
-			case 'left':
-				return ['x' => -$right, 'y' => -$forward];
-				break;
-		}
+		return $this->position->getRelativeSpace($direction);
 	}
 
 

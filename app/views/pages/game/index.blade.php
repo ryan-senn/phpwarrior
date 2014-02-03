@@ -30,7 +30,8 @@
 <div id="instructions">
 
 <div style="margin-bottom: 20px;">
-<a href="#" id="go" class="button">Go Warrior!</a>
+	<a href="#" id="go" class="button">Go Warrior!</a>
+	<a href="{{ URL::route('game.simulate') }}" id="go" class="button" style="margin-left: 10px;">simulate</a>
 </div>
 
 <div class="shadow-line" style="margin: 0px -20px"></div>
@@ -44,12 +45,14 @@
 
 <h2>Helpers</h2>
 <ul>
-	<li>$this->position->getRelativeDirectionOfStairs();</li>
+	@foreach($helpers as $helper)
+		<li>{{ $helper }}</li>
+	@endforeach
 </ul>
 
 <h2>Map</h2>
 
-{{ View::make('pages.map', ['map' => $map]) }}
+{{-- View::make('pages.map', ['map' => $map]) --}}
 
 </div>
 
@@ -62,8 +65,7 @@ var editor = ace.edit("editor");
 var PhpMode = require("ace/mode/php").Mode;
 editor.getSession().setMode(new PhpMode());
 
-(function($)
-{
+(function($) {
     $('a#go').click(function() {
 	    $('textarea').val(editor.getValue());
 	    $.post('/submit', $('form').serialize(), function(data) {

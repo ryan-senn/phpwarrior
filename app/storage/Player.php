@@ -8,12 +8,18 @@ class Warrior extends BaseWarrior
     public function playTurn()
     {
         $direction = $this->position->getRelativeDirectionOfStairs();
-        
         $space = $this->feel($direction);
         
         if($space->isEmpty())
         {
-            $this->walk($direction);
+            if($this->health < 20 && !$this->potion->isEmpty())
+            {
+                $this->drink();
+            }
+            else
+            {
+                $this->walk($direction);
+            }
         }
         else
         {

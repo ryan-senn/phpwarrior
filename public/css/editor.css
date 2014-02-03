@@ -1,7 +1,7 @@
 div#editor {
   border: 1px solid #ccc;
   position: relative;
-  width: 500px;
+  width: 600px;
   height: 600px;
   display: inline-block;
 }
@@ -12,4 +12,5 @@ div#instructions {
   display: inline-block;
   padding: 20px;
   background-color: #fff;
+  width: 630px;
 }
