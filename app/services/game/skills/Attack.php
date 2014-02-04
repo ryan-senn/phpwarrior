@@ -12,6 +12,10 @@ class Attack extends Skill
 		{
 			$this->unit->addEvent('attacks and hits a wall');
 		}
+		elseif($space->isStairs())
+		{
+			$this->unit->addEvent('attacks and hits the stairs');
+		}
 		elseif($receiver = $space->getUnit())
 		{
 			$this->unit->damage($receiver);

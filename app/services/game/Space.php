@@ -1,6 +1,7 @@
 <?php namespace Services\Game;
 
 use Services\Game\Units\Warrior;
+use Services\Game\Units\Unit;
 
 
 class Space
@@ -43,15 +44,9 @@ class Space
 	}
 
 
-	public function isPlayer()
-	{
-		return $this->isWarrior();
-	}
-
-
 	public function isEnnemy()
 	{
-		return !$this->isPlayer() && !$this->isWall();
+		return $this->getUnit() instanceof Unit && !$this->isWarrior();
 	}
 
 
@@ -63,7 +58,7 @@ class Space
 
 	public function isStairs()
 	{
-		$this->map->stairs_location == [$this->x, $this->y];
+		return $this->map->getStairsLocation() == ['x' => $this->x, 'y' => $this->y];
 	}
 
 

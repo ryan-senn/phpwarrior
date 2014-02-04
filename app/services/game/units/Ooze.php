@@ -18,7 +18,7 @@ class Ooze extends Unit
 		{
 			$space = $this->feel($direction);
 
-			if($space->isPlayer())
+			if($space->isWarrior())
 			{
 				$this->attack($direction);
 				return;

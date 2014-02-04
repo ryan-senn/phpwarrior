@@ -69,7 +69,7 @@ class Map
 	{
 		return array_filter($this->getUnits(), function($unit)
 		{
-			return $unit instanceof Warrior;
+			return !$unit instanceof Warrior;
 		});
 	}
 
@@ -108,7 +108,7 @@ class Map
 
 	public function isOut($x, $y)
 	{
-		return $x <= 0 || $x >= $this->width || $y <= 0 || $y >= $this->height;
+		return $x < 0 || $x >= $this->width || $y < 0 || $y >= $this->height;
 	}
 
 

@@ -2,7 +2,6 @@
 
 use Services\Game\Map;
 use Services\Game\Position;
-use Services\Game\Units\Warrior;
 
 
 class PositionTest extends TestCase
@@ -80,5 +79,23 @@ class PositionTest extends TestCase
 
 		$this->assertEquals('west', $this->position->getDirection());
 		$this->assertEquals(0, $this->position->getX());
+	}
+
+
+	public function testRelativeDirectionOfSpaceIsEast()
+	{
+		$space = $this->map->getSpace(3, 3);
+		$direction = $this->position->getRelativeDirectionOfSpace($space);
+
+		$this->assertEquals('right', $direction);
+	}
+
+
+	public function testRelativeDirectionOfSpaceIsSouth()
+	{
+		$space = $this->map->getSpace(1, 0);
+		$direction = $this->position->getRelativeDirectionOfSpace($space);
+
+		$this->assertEquals('backward', $direction);
 	}
 }

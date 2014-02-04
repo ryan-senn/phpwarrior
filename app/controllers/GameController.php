@@ -63,7 +63,7 @@ class GameController extends BaseController
 			{
 				$event = new Event;
 				$event->setUnit($warrior);
-				$event->setMessage('wom the game');
+				$event->setMessage('won the game');
 
 				Events::add($event);
 				break;

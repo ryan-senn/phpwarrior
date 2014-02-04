@@ -30,6 +30,12 @@ class Position
 	}
 
 
+	public function getDirection()
+	{
+		return self::$directions['absolute'][$this->direction_index];
+	}
+
+
 	public function getX()
 	{
 		return $this->x;
@@ -42,70 +48,57 @@ class Position
 	}
 
 
-	public function isAt($x, $y)
-	{
-		return $this->x == $x && $this->y == $y;
-	}
-
-
-	public function getDirection()
-	{
-		return self::$directions['absolute'][$this->direction_index];
-	}
-
-
-	public function getRelativeDirectionOfStairs()
-	{
-		$location = $this->map->getStairsLocation();
-
-		$x = $this->x - $location['x'];
-		$y = $this->y - $location['y'];
-
-		if(abs($x) > abs($y))
-		{
-			if($x > 0)
-			{
-				return '';
-			}
-		}
-		else
-		{
-
-		}
-	}
-
-
 	public function getSpace()
 	{
 		return $this->map->getSpace($this->x, $this->y);
 	}
 
 
+	public function isAt($x, $y)
+	{
+		return $this->x == $x && $this->y == $y;
+	}
+
+
 	public function move($direction)
 	{
-		$relative_direction = $this->getAbsoluteDirection($direction);
+		// update the position
+		$space = $this->getRelativeSpace($direction);
+		$this->x = $space->getX();
+		$this->y = $space->getY();
 
 		// update the direction
-		$this->direction_index = array_search($relative_direction, self::$directions['absolute']);
+		$absolute_direction = $this->getAbsoluteDirection($direction);
+		$this->direction_index = array_search($absolute_direction, self::$directions['absolute']);
+	}
 
-		// update the position
-		switch($relative_direction)
+
+	public function getRelativeSpace($direction)
+	{
+		$absolute_direction = $this->getAbsoluteDirection($direction);
+
+		$x = $this->getX();
+		$y = $this->getY();
+
+		switch($absolute_direction)
 		{
 			case 'north':
-				$this->y += 1;
+				$y += 1;
 				break;
 			case 'east':
-				$this->x += 1;
+				$x += 1;
 				break;
 			case 'south':
-				$this->y -= 1;
+				$y -= 1;
 				break;
 			case 'west':
-				$this->x -= 1;
+				$x -= 1;
 				break;
 			default:
 				throw new \Exception('Invalid direction');
 		}
+
+		return $this->map->getSpace($x, $y);
 	}
 
 
@@ -124,6 +117,38 @@ class Position
 		return self::$directions['absolute'][$direction];
 	}
 
+
+	public function getAbsoluteDirectionOfSpace(Space $space)
+	{
+		if(abs($this->x - $space->getX()) > abs($this->y - $space->getY()))
+		{
+			return $this->x < $space->getX() ? 'east' : 'west';
+		}
+
+		return $this->y < $space->getY() ? 'north' : 'south';
+  	}
+
+
+	public function getRelativeDirectionOfSpace(Space $space)
+	{
+		$direction = $this->getAbsoluteDirectionOfSpace($space);
+		
+		$offset = array_search($direction, self::$directions['absolute']) - $this->direction_index;
+
+		if($offset < 0)
+		{
+			$offset += 4;
+		}
+
+		return self::$directions['relative'][$offset];
+	}
+
+
+	public function getRelativeDirectionOfStairs()
+	{
+		return $this->getRelativeDirectionOfSpace($this->map->getStairsSpace());
+	}
+    
 
 	public function __toString()
 	{

@@ -15,7 +15,7 @@
 @foreach($maps as $key => $map)
 
 <div id="turn_{{ $key }}" class="turn">
-	<h1>Turn {{ $key }}</h1>
+	<p>Turn {{ $key }}</p>
 
 	<ul>
 	@foreach(Services\Game\Events::getTurn($key) as $event)
