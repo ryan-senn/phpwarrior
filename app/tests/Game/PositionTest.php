@@ -91,7 +91,7 @@ class PositionTest extends TestCase
 	}
 
 
-	public function testGetAbsoluteDirectionFromNorth()
+	public function testGetAbsoluteDirectionFacingNorth()
 	{
 		$direction = $this->position->getAbsoluteDirection('left');
 
@@ -99,7 +99,7 @@ class PositionTest extends TestCase
 	}
 
 
-	public function testGetAbsoluteDirectionFromWest()
+	public function testGetAbsoluteDirectionFacingWest()
 	{
 		$position = new Position($this->map, 2, 2, 'west');
 		$direction = $position->getAbsoluteDirection('backward');
