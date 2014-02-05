@@ -40,9 +40,18 @@ class PositionTest extends TestCase
 	}
 
 
-	public function testDirection()
+	public function testGetDirection()
 	{
 		$this->assertEquals('north', $this->position->getDirection());
+	}
+
+
+	public function testGetRelativeSpace()
+	{
+		$space = $this->position->getRelativeSpace('left');
+
+		$this->assertEquals(0, $space->getX());
+		$this->assertEquals(2, $space->getY());
 	}
 
 
@@ -79,6 +88,23 @@ class PositionTest extends TestCase
 
 		$this->assertEquals('west', $this->position->getDirection());
 		$this->assertEquals(0, $this->position->getX());
+	}
+
+
+	public function testGetAbsoluteDirectionFromNorth()
+	{
+		$direction = $this->position->getAbsoluteDirection('left');
+
+		$this->assertEquals('west', $direction);
+	}
+
+
+	public function testGetAbsoluteDirectionFromWest()
+	{
+		$position = new Position($this->map, 2, 2, 'west');
+		$direction = $position->getAbsoluteDirection('backward');
+
+		$this->assertEquals('east', $direction);
 	}
 
 
