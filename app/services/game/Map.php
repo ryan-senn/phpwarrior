@@ -7,28 +7,28 @@ use Services\Game\Units\Warrior;
 class Map
 {
 	
-	protected $height = 0;
 	protected $width = 0;
+	protected $height = 0;
 	protected $units = [];
 	protected $stairs_location = ['x' => -1, 'y' => -1];
 
 
-	public function __construct($height, $width)
+	public function __construct($width, $height)
 	{
-		$this->height = $height;
 		$this->width = $width;
-	}
-
-
-	public function getHeight()
-	{
-		return $this->height;
+		$this->height = $height;
 	}
 
 
 	public function getWidth()
 	{
 		return $this->width;
+	}
+
+
+	public function getHeight()
+	{
+		return $this->height;
 	}
 
 

@@ -98,4 +98,12 @@ class PositionTest extends TestCase
 
 		$this->assertEquals('backward', $direction);
 	}
+
+
+	public function testRelativeDirectionOfStairs()
+	{
+		$this->map->placeStairs(1, 4);
+
+		$this->assertEquals('forward', $this->position->getRelativeDirectionOfStairs());
+	}
 }

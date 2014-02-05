@@ -21,6 +21,15 @@ class MapTest extends TestCase
 	}
 
 
+	public function testGetSize()
+	{
+		$map = new Map(3, 6);
+
+		$this->assertEquals(3, $map->getWidth());
+		$this->assertEquals(6, $map->getHeight());
+	}
+
+
 	public function testGetUnitsWithPosition()
 	{
 		$position = new Position($this->map, 2, 2);
