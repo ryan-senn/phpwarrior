@@ -52,7 +52,7 @@
 
 <h2>Map</h2>
 
-{{-- View::make('pages.map', ['map' => $map]) --}}
+{{ View::make('pages.map', ['map' => $map]) }}
 
 </div>
 

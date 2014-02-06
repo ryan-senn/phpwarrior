@@ -4,18 +4,18 @@
 abstract class Map
 {
 	
-	protected static $skills = [];
-	protected static $helpers = [];
+	protected $skills = [];
+	protected $helpers = [];
 
 
-	public static function getSkills()
+	public function getSkills()
 	{
-		return static::$skills;
+		return $this->skills;
 	}
 
 
-	public static function getHelpers()
+	public function getHelpers()
 	{
-		return static::$helpers;
+		return $this->helpers;
 	}
 }

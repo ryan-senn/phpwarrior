@@ -11,7 +11,6 @@
 					<img src="/images/stairs.jpg" alt="stairs" />
 				@elseif($map->getUnit($x, $y) instanceof Services\Game\Units\Unit)
 					<img src="/images/{{ strtolower($map->getUnit($x, $y)) }}.jpg" alt="{{ strtolower($map->getUnit($x, $y)) }}" />
-					{{ $map->getUnit($x, $y)->getPosition()->getDirection() }}
 				@endif
 			</td>
 			@endfor

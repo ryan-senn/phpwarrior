@@ -3,52 +3,47 @@
 use Services\Game\Position;
 use Services\Game\Units\Ooze;
 
-require('Skill.php');
 
-
-class WalkTest extends Skill
+class AttackTest extends SkillTest
 {
 
-	public function testDoesNotHaveSkill()
+	public function testWarriorDoesDamage()
 	{
-		$this->setExpectedException('Services\Game\Skills\InvalidSkillException');
-
-		$this->warrior->walk('forward');
-	}
-
-
-	public function testDoesMove()
-	{
-		$this->warrior->setSkills(['walk']);
-		$this->warrior->walk();
-
-		$this->assertEquals(3, $this->warrior->getPosition()->getY());
-	}
-
-
-	public function testBumpsIntoWall()
-	{
-		$position = new Position($this->map, 4, 0);
-		$this->warrior->setPosition($position);
-		$this->warrior->setSkills(['walk']);
-
-		$this->warrior->walk('right');
-
-		// assert that warrior stays at x:4
-		$this->assertEquals(4, $this->warrior->getPosition()->getX());
-	}
-
-
-	public function testBumpsIntoUnit()
-	{
-		$position = new Position($this->map, 0, 2);
-		$ooze = new Ooze($position);
+		$this->warrior->setSkills(['attack']);
+		
+		$ooze = new Ooze(new Position($this->map, 1, 3));
 		$this->map->addUnit($ooze);
 
-		$this->warrior->setSkills(['walk']);
-		$this->warrior->walk('left');
+		$this->warrior->attack();
 
-		// assert that warrior stays at x:1
-		$this->assertEquals(1, $this->warrior->getPosition()->getX());
+		$this->assertEquals(7, $ooze->getHealth());
+	}
+
+
+	public function testWarriorAttacksWrongDirection()
+	{
+		$this->warrior->setSkills(['attack']);
+		
+		$ooze = new Ooze(new Position($this->map, 1, 3));
+
+		// place ooze on the map
+		$this->map->addUnit($ooze);
+
+		$this->warrior->attack('left');
+
+		$this->assertEquals(10, $ooze->getHealth());
+	}
+
+
+	public function testOozeDoesDamageToWarrior()
+	{
+		$ooze = new Ooze(new Position($this->map, 1, 3));
+
+		// place warrior on the map
+		$this->map->addUnit($this->warrior);
+
+		$ooze->attack('backward');
+
+		$this->assertEquals(17, $this->warrior->getHealth());
 	}
 }

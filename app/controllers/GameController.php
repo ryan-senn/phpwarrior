@@ -15,17 +15,29 @@ class GameController extends BaseController
 {
 
 	protected $layout = 'layouts.base';
+	protected $map = null;
+
+
+	protected function getMap()
+	{
+		if(is_null($this->map))
+		{
+			$this->map = new map_2;
+		}
+
+		return $this->map;
+	}
 
 
 	public function index()
 	{
-		$map = map_3::get();
+		$map = $this->getMap();
 
 		$this->layout->content = View::make('pages.game.index', [
 			'code' => htmlspecialchars(file_get_contents(storage_path() .'/Player.php')),
-			'map' => $map,
-			'skills' => map_3::getSkills(),
-			'helpers' => map_3::getHelpers(),
+			'map' => $map->get(),
+			'skills' => $map->getSkills(),
+			'helpers' => $map->getHelpers(),
 		]);
 	}
 
@@ -40,7 +52,7 @@ class GameController extends BaseController
 
 	public function simulate()
 	{
-		$map = map_3::get();
+		$map = $this->getMap()->get();
 		$warrior = $map->getWarrior();
 		
 		$maps[] = clone $map;
@@ -90,8 +102,8 @@ class GameController extends BaseController
 		$this->layout->content = View::make('pages.game.simulate', [
 			'maps' => $maps,
 			'events' => Events::all(),
-			'skills' => map_3::getSkills(),
-			'helpers' => map_3::getHelpers(),
+			'skills' => $this->getMap()->getSkills(),
+			'helpers' => $this->getMap()->getHelpers(),
 		]);
 	}
 }

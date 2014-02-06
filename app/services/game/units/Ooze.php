@@ -11,6 +11,8 @@ class Ooze extends Unit
 	protected $health = 10;
 	protected $attack = 3;
 
+	protected $skills = ['attack'];
+
 
 	public function playTurn()
 	{

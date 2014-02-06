@@ -5,7 +5,7 @@ use Services\Game\Position;
 use Services\Game\Units\Warrior;
 
 
-class Skill extends TestCase
+class SkillTest extends TestCase
 {
 
 	public function setup()
@@ -21,5 +21,21 @@ class Skill extends TestCase
 		$this->map = null;
 		$this->position = null;
 		$this->warrior = null;
+	}
+
+
+	public function testDoesNotHaveWalkSkill()
+	{
+		$this->setExpectedException('Services\Game\Skills\InvalidSkillException');
+
+		$this->warrior->walk();
+	}
+
+
+	public function testDoesNotHaveAttackSkill()
+	{
+		$this->setExpectedException('Services\Game\Skills\InvalidSkillException');
+
+		$this->warrior->attack();
 	}
 }

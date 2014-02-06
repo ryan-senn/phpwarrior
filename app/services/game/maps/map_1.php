@@ -8,16 +8,16 @@ use Services\Game\Position;
 class map_1 extends BaseMap
 {
 
-	protected static $description = 'Make your way to the stairs using your skills. There are helpers provided to... help.';
+	protected $description = 'Make your way to the stairs using your skills. There are helpers provided to... help.';
 
-	protected static $skills = ['walk'];
+	protected $skills = ['walk'];
 
-	protected static $helpers = [
+	protected $helpers = [
 		'$this->position->getRelativeDirectionOfStairs();',
 	];
 
 
-	public static function get()
+	public function get()
 	{
 		require(storage_path() .'/Player.php');
 
@@ -26,7 +26,7 @@ class map_1 extends BaseMap
 
 		$position = new Position($map, 1, 0);
 		$warrior = new \Warrior($position);
-		$warrior->setSkills(self::$skills);
+		$warrior->setSkills($this->skills);
 		$map->addUnit($warrior);
 
 		return $map;

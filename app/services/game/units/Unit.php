@@ -14,7 +14,7 @@ abstract class Unit
 
 	protected $position;
 
-	protected $skills = ['attack'];
+	protected $skills = [];
 
 	protected $usedSkill = false;
 

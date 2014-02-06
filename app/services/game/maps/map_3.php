@@ -10,15 +10,15 @@ use Services\Game\Items\Potion;
 class map_3 extends BaseMap
 {
 
-	protected static $skills = ['walk', 'attack', 'drink'];
+	protected $skills = ['walk', 'attack', 'drink'];
 	
-	protected static $helpers = [
+	protected $helpers = [
 		'$this->position->getRelativeDirectionOfStairs()',
 		'$this->potion->isEmpty()',
 	];
 
 
-	public static function get()
+	public function get()
 	{
 		require(storage_path() .'/Player.php');
 
@@ -27,7 +27,7 @@ class map_3 extends BaseMap
 
 		$position = new Position($map, 4, 3);
 		$warrior = new \Warrior($position);
-		$warrior->setSkills(self::$skills);
+		$warrior->setSkills($this->skills);
 		$warrior->setPotion(new Potion(5, 2));
 		$map->addUnit($warrior);
 
