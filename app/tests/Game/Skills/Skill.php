@@ -5,20 +5,21 @@ use Services\Game\Position;
 use Services\Game\Units\Warrior;
 
 
-class Skill
+class Skill extends TestCase
 {
 
 	public function setup()
 	{
-		$map = new Map(5, 5);
-		$position = new Position($map, 0, 2);
-
-		$this->warrior = new Warrior($position);
+		$this->map = new Map(5, 5);
+		$this->position = new Position($this->map, 1, 2);
+		$this->warrior = new Warrior($this->position);
 	}
 
 
 	public function teardown()
 	{
+		$this->map = null;
+		$this->position = null;
 		$this->warrior = null;
 	}
 }

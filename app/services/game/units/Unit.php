@@ -3,6 +3,7 @@
 use Services\Game\Position;
 use Services\Game\Events;
 use Services\Game\Event;
+use Services\Game\Skills\InvalidSkillException;
 
 
 abstract class Unit
@@ -46,7 +47,7 @@ abstract class Unit
 	{
 		if(!in_array($method, $this->getSkills()))
 		{
-			throw new \Exception('Unit '. static::NAME .' doesnt have skill '. $method);
+			throw new InvalidSkillException('Unit '. static::NAME .' doesnt have skill '. $method);
 		}
 
 		if($this->usedSkill)

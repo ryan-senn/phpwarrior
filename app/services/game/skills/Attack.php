@@ -11,12 +11,16 @@ class Attack extends Skill
 		if($space->isWall())
 		{
 			$this->unit->addEvent('attacks and hits a wall');
+			return;
 		}
-		elseif($space->isStairs())
+
+		if($space->isStairs())
 		{
 			$this->unit->addEvent('attacks and hits the stairs');
+			return;
 		}
-		elseif($receiver = $space->getUnit())
+
+		if($receiver = $space->getUnit())
 		{
 			$this->unit->damage($receiver);
 
@@ -25,10 +29,10 @@ class Attack extends Skill
 				$this->unit->addEvent('killed '. $receiver::NAME);
 				$receiver->setPosition(null);
 			}
+
+			return;
 		}
-		else
-		{
-			$this->unit->addEvent('attacks and hits nothing');
-		}
+
+		$this->unit->addEvent('attacks and hits nothing');
 	}
 }

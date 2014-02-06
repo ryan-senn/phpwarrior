@@ -13,18 +13,21 @@ class Walk extends Skill
 		if($space->isEmpty())
 		{
 			$this->unit->getPosition()->move($direction);
+			return;
 		}
-		elseif($space->isWall())
+
+		if($space->isWall())
 		{
 			$this->unit->addEvent('bumps into a wall');
+			return;
 		}
-		elseif($space->isEnnemy())
+
+		if($space->isEnnemy())
 		{
 			$this->unit->addEvent('bumps into '. $this->unit->getSpace($direction)->getUnit());
+			return;
 		}
-		else
-		{
-			throw new \Exception('Walk skill doesn\'t know what to do');
-		}
+
+		throw new \Exception('walk skill doesnt know what to do');
 	}
 }

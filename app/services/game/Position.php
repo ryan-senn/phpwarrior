@@ -94,8 +94,6 @@ class Position
 			case 'west':
 				$x -= 1;
 				break;
-			default:
-				throw new \Exception('Invalid direction');
 		}
 
 		return $this->map->getSpace($x, $y);
