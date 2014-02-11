@@ -3,6 +3,9 @@
 
 class Attack extends Skill
 {
+
+	protected static $description = 'Attacks in a given direction (forward by default)';
+
 	
 	public function execute($direction = 'forward')
 	{

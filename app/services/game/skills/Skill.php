@@ -8,10 +8,17 @@ abstract class Skill
 {
 
 	protected $unit;
+	protected static $description;
 
 
 	public function __construct(Unit $unit)
 	{
 		$this->unit = $unit;
+	}
+
+
+	public static function getDescription()
+	{
+		return static::$description;
 	}
 }

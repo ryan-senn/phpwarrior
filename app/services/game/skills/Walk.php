@@ -3,6 +3,9 @@
 
 class Walk extends Skill
 {
+
+	protected static $description = 'Walks in a given direction (forward by default)';
+
 	
 	public function execute($direction = 'forward')
 	{

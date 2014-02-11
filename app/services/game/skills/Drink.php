@@ -6,6 +6,9 @@ use Services\Game\Items\Potion;
 class Drink extends Skill
 {
 
+	protected static $description = 'Takes a sip from the potion to heal up';
+
+
 	public function execute()
 	{
 		$potion = $this->unit->getPotion();
