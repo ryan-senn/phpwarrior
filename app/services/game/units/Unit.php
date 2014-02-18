@@ -117,18 +117,6 @@ abstract class Unit
 	}
 
 
-	public function feel($direction = 'forward')
-	{
-		// only log warriors senses
-		if($this->isWarrior())
-		{
-			$this->addEvent('feels '. $direction);
-		}
-
-		return $this->getSpace($direction);
-	}
-
-
 	public function damage(Unit $receiver)
 	{
 		$receiver->loseHealth($this->attack);

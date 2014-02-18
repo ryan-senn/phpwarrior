@@ -9,6 +9,8 @@ class Feel extends Skill
 	
 	public function execute($direction = 'forward')
 	{
+		$this->unit->addEvent('feels '. $direction);
+		
 		return $this->unit->getSpace($direction);
 	}
 }
