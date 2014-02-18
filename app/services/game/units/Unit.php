@@ -16,7 +16,7 @@ abstract class Unit
 
 	protected $skills = [];
 
-	protected $usedSkill = false;
+	protected $usedAction = false;
 
 
 	public function __construct(Position $position)
@@ -39,18 +39,20 @@ abstract class Unit
 
 	public function endTurn()
 	{
-		$this->usedSkill = false;
+		$this->usedAction = false;
 	}
 
 
 	public function __call($method, $arguments)
 	{
+		// make sure the skill actually exists
 		if(!in_array($method, $this->getSkills()))
 		{
 			throw new InvalidSkillException('Unit '. static::NAME .' doesnt have skill '. $method);
 		}
 
-		if($this->usedSkill)
+		// can only use one action per turn
+		if($this->usedAction)
 		{
 			$this->addEvent('already used a skill this turn and can\'t '. $method);
 			return;
@@ -59,6 +61,7 @@ abstract class Unit
 		$name = 'Services\Game\Skills\\'. ucfirst($method);
 		$skill = new $name($this);
 
+		// only pass arguments to the skill if required
 		$arguments = implode(',', $arguments);
 
 		if($arguments != '')
@@ -70,7 +73,11 @@ abstract class Unit
 			$skill->execute();
 		}
 
-		$this->usedSkill = true;
+		// if the skill is an action, set flag to true so no more actions can be performed this turn
+		if($skill->isAction())
+		{
+			$this->usedAction = true;
+		}
 	}
 
 

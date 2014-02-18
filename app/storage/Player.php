@@ -19,6 +19,7 @@ class Warrior extends BaseWarrior
             else
             {
                 $this->walk($direction);
+                $this->walk($direction);
             }
         }
         else

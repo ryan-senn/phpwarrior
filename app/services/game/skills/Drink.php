@@ -6,6 +6,7 @@ use Services\Game\Items\Potion;
 class Drink extends Skill
 {
 
+	protected static $isAction = true;
 	protected static $description = 'Takes a sip from the potion to heal up';
 
 

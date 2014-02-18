@@ -4,6 +4,7 @@
 class Attack extends Skill
 {
 
+	protected static $isAction = true;
 	protected static $description = 'Attacks in a given direction (forward by default)';
 
 	

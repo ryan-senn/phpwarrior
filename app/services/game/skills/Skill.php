@@ -8,6 +8,7 @@ abstract class Skill
 {
 
 	protected $unit;
+	protected static $isAction = false;
 	protected static $description;
 
 
@@ -20,5 +21,11 @@ abstract class Skill
 	public static function getDescription()
 	{
 		return static::$description;
+	}
+
+
+	public static function isAction()
+	{
+		return static::$isAction;
 	}
 }

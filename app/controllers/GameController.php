@@ -22,7 +22,7 @@ class GameController extends BaseController
 	{
 		if(is_null($this->map))
 		{
-			$this->map = new map_2;
+			$this->map = new map_1;
 		}
 
 		return $this->map;
