@@ -10,7 +10,7 @@ class map_1 extends BaseMap
 
 	protected $description = 'Make your way to the stairs using your skills. There are helpers provided to... help.';
 
-	protected $skills = ['walk'];
+	protected $skills = ['feel', 'walk'];
 
 	protected $helpers = [
 		'$this->position->getRelativeDirectionOfStairs();',

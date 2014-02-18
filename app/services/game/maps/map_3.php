@@ -10,7 +10,7 @@ use Services\Game\Items\Potion;
 class map_3 extends BaseMap
 {
 
-	protected $skills = ['walk', 'attack', 'drink'];
+	protected $skills = ['feel', 'walk', 'attack', 'drink'];
 	
 	protected $helpers = [
 		'$this->position->getRelativeDirectionOfStairs()',

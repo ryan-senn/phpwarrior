@@ -9,7 +9,7 @@ use Services\Game\Units\Ooze;
 class map_2 extends BaseMap
 {
 
-	protected $skills = ['walk', 'attack'];
+	protected $skills = ['feel', 'walk', 'attack'];
 
 	protected $helpers = [
 		'$this->position->getRelativeDirectionOfStairs();',
