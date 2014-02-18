@@ -51,32 +51,32 @@ abstract class Unit
 			throw new InvalidSkillException('Unit '. static::NAME .' doesnt have skill '. $method);
 		}
 
-		// can only use one action per turn
-		if($this->usedAction)
-		{
-			$this->addEvent('already used a skill this turn and can\'t '. $method);
-			return;
-		}
-
 		$name = 'Services\Game\Skills\\'. ucfirst($method);
 		$skill = new $name($this);
+
+		// if the skill is an action, set flag to true so no more actions can be performed this turn
+		if($skill->isAction())
+		{
+			// can only use one action per turn
+			if($this->usedAction)
+			{
+				$this->addEvent('already used a skill this turn and can\'t '. $method);
+				return;
+			}
+
+			$this->usedAction = true;
+		}
 
 		// only pass arguments to the skill if required
 		$arguments = implode(',', $arguments);
 
 		if($arguments != '')
 		{
-			$skill->execute($arguments);
+			return $skill->execute($arguments);
 		}
 		else
 		{
-			$skill->execute();
-		}
-
-		// if the skill is an action, set flag to true so no more actions can be performed this turn
-		if($skill->isAction())
-		{
-			$this->usedAction = true;
+			return $skill->execute();
 		}
 	}
 
