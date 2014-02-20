@@ -1,9 +1,9 @@
 <?php
 
-Route::get('/', [
+Route::get('/{map}', [
 	'as' => 'game.index',
 	'uses' => 'GameController@index',
-]);
+])->where(['map' => '[0-9]+']);
 
 Route::post('/submit', [
 	'as' => 'game.submit',

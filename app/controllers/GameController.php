@@ -6,38 +6,39 @@ use Services\Game\Units\Unit;
 use Services\Game\Map;
 use Services\Game\Events;
 use Services\Game\Event;
-use Services\Game\Maps\map_1;
-use Services\Game\Maps\map_2;
-use Services\Game\Maps\map_3;
 
 
 class GameController extends BaseController
 {
 
 	protected $layout = 'layouts.base';
-	protected $map = null;
+
+
+	protected function setMap($level)
+	{
+		$name = 'Services\Game\Maps\Map_'. $level;
+		Session::set('map', new $name);
+	}
 
 
 	protected function getMap()
 	{
-		if(is_null($this->map))
-		{
-			$this->map = new map_1;
-		}
-
-		return $this->map;
+		return Session::get('map');
 	}
 
 
-	public function index()
+	public function index($level)
 	{
+		$this->setMap($level);
+
 		$map = $this->getMap();
 
 		$this->layout->content = View::make('pages.game.index', [
 			'code' => htmlspecialchars(file_get_contents(storage_path() .'/Player.php')),
 			'map' => $map->get(),
+			'level' => $level,
 			'skills' => $map->getSkills(),
-			'helpers' => $map->getHelpers(),
+			'description' => $map->getDescription(),
 		]);
 	}
 
@@ -103,7 +104,6 @@ class GameController extends BaseController
 			'maps' => $maps,
 			'events' => Events::all(),
 			'skills' => $this->getMap()->getSkills(),
-			'helpers' => $this->getMap()->getHelpers(),
 		]);
 	}
 }

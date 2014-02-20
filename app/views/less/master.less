@@ -5,6 +5,7 @@ html
     font-size: 12pt;
     background-color: #eee;
     height: 100%;
+    line-height: 150%;
 }
 
 body
@@ -58,6 +59,14 @@ th
     font-weight: normal;
 }
 
+code
+{
+    background-color: #fafaf7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px;
+}
+
 #header
 {
     background-color: #fafaf7;
@@ -69,13 +78,13 @@ th
 #content
 {
     background-color: #f3f1ec;
-    padding: 50px 0;
+    padding: 30px 0;
     box-shadow: inset 1px 4px 6px -6px #777770;
 }
 
 .content
 {
-    width: 1280px;
+    width: 1080px;
     margin: 0 auto;
 }
 
@@ -84,4 +93,26 @@ th
     border-top: 1px solid #ccc;
     height: 6px;
     box-shadow: inset 1px 4px 6px -6px #777770;
+}
+
+#description
+{
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+
+    .text
+    {
+        vertical-align: top;
+        display: inline-block;
+        width: 680px;
+        margin-right: 50px;
+    }
+
+    .map
+    {
+        display: inline-block;
+        width: 300px;
+    }
 }

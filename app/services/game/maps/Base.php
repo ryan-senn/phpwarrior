@@ -1,11 +1,11 @@
 <?php namespace Services\Game\Maps;
 
 
-abstract class Map
+abstract class Base
 {
 	
+	protected $description = 'no description';
 	protected $skills = [];
-	protected $helpers = [];
 
 
 	public function getSkills()
@@ -14,8 +14,8 @@ abstract class Map
 	}
 
 
-	public function getHelpers()
+	public function getDescription()
 	{
-		return $this->helpers;
+		return $this->description;
 	}
 }

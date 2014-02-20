@@ -18,6 +18,14 @@
 
 @section('content')
 
+<div id="description">
+	<div class="text">
+		<h2>Level {{ $level }}</h2>
+		<span>{{ $description }}</span>
+	</div>
+	<div class="map">{{ View::make('pages.map', ['map' => $map]) }}</div>
+</div>
+
 {{ Form::open(['route' => 'game.submit', 'method' => 'post']) }}
 
 <textarea name="code" style="display: none;"></textarea>
@@ -39,22 +47,9 @@
 <h2>Available skills</h2>
 <ul>
 	@foreach($skills as $skill)
-		<li>{{ $skill }}</li>
+		<li>{{ Services\Game\Skills\Skill::getDescription($skill) }}</li>
 	@endforeach
 </ul>
-
-<h2>Helpers</h2>
-<ul>
-	@foreach($helpers as $helper)
-		<li>{{ $helper }}</li>
-	@endforeach
-</ul>
-
-<h2>Map</h2>
-
-{{ View::make('pages.map', ['map' => $map]) }}
-
-</div>
 
 @stop
 

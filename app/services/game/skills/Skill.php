@@ -9,7 +9,7 @@ abstract class Skill
 
 	protected $unit;
 	protected static $isAction = false;
-	protected static $description;
+	protected static $description = 'no description';
 
 
 	public function __construct(Unit $unit)
@@ -18,9 +18,10 @@ abstract class Skill
 	}
 
 
-	public static function getDescription()
+	public static function getDescription($name)
 	{
-		return static::$description;
+		$skill = 'Services\Game\Skills\\'. ucfirst($name);
+		return '<b>'. $name .'</b>: '. $skill::$description;
 	}
 
 

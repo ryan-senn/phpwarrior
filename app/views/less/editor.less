@@ -2,7 +2,7 @@ div#editor
 {
 	border: 1px solid #ccc;
 	position: relative;
-	width: 600px;
+	width: 550px;
 	height: 600px;
 	display: inline-block;
 }
@@ -10,10 +10,18 @@ div#editor
 div#instructions
 {
 	vertical-align: top;
+	float: right;
 	border: 1px solid #ccc;
 	position: relative;
 	display: inline-block;
 	padding: 20px;
     background-color: #fff;
-    width: 630px;
+    width: 460px;
+
+    &:after
+    {
+        content:'';
+        display:block;
+        clear: both;
+    }
 }

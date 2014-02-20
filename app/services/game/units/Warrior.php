@@ -25,4 +25,10 @@ class Warrior extends Unit
 	{
 		return $this->potion;
 	}
+
+
+	public function getDirectionOfStairs()
+	{
+		return $this->position->getRelativeDirectionOfStairs();
+	}
 }
