@@ -10,6 +10,14 @@ body {
   margin: 0;
   padding: 0;
 }
+.clear:before,
+.clear:after {
+  content: "";
+  display: table;
+}
+.clear:after {
+  clear: both;
+}
 a {
   text-decoration: none;
   color: RoyalBlue;
@@ -60,6 +68,17 @@ code {
   padding: 30px 0;
   box-shadow: inset 1px 4px 6px -6px #777770;
 }
+#content:before,
+#content:after {
+  content: "";
+  display: table;
+}
+#content:after {
+  clear: both;
+}
+#footer {
+  min-height: 50px;
+}
 .content {
   width: 1080px;
   margin: 0 auto;
@@ -68,6 +87,20 @@ code {
   border-top: 1px solid #ccc;
   height: 6px;
   box-shadow: inset 1px 4px 6px -6px #777770;
+}
+div#editor {
+  border: 1px solid #ccc;
+  position: relative;
+  width: 550px;
+  height: 600px;
+  display: inline-block;
+}
+div#instructions {
+  float: right;
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #fff;
+  width: 460px;
 }
 #description {
   border: 1px solid #ccc;
@@ -84,4 +117,11 @@ code {
 #description .map {
   display: inline-block;
   width: 300px;
+}
+.api li {
+  margin: 15px 0;
+}
+.api li span {
+  display: block;
+  color: #666;
 }

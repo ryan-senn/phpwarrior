@@ -10,7 +10,6 @@
 {{ HTML::script('ace/ace.js') }}
 {{ HTML::script('ace/mode-php.js') }}
 
-{{ HTML::style('css/editor.css') }}
 {{ HTML::style('css/map.css') }}
 
 @stop
@@ -23,7 +22,7 @@
 		<h2>Level {{ $level }}</h2>
 		<span>{{ $description }}</span>
 	</div>
-	<div class="map">{{ View::make('pages.map', ['map' => $map]) }}</div>
+	<div class="map">{{ View::make('partials.map', ['map' => $map]) }}</div>
 </div>
 
 {{ Form::open(['route' => 'game.submit', 'method' => 'post']) }}
@@ -37,19 +36,25 @@
 
 <div id="instructions">
 
-<div style="margin-bottom: 20px;">
-	<a href="#" id="go" class="button">Go Warrior!</a>
-	<a href="{{ URL::route('game.simulate') }}" id="go" class="button" style="margin-left: 10px;">simulate</a>
+	<div style="margin-bottom: 20px;">
+		<a href="#" id="go" class="button">Go Warrior!</a>
+		<a href="{{ URL::route('game.simulate') }}" id="go" class="button" style="margin-left: 10px;">simulate</a>
+	</div>
+
+	<div class="shadow-line" style="margin: 0px -20px"></div>
+
+
+	{{ View::make('partials.skills', ['skills' => $skills]) }}
+
+	@if(in_array('feel', $skills))
+		{{ View::make('partials.space') }}
+	@endif
+
+	@if(in_array('drink', $skills))
+		{{ View::make('partials.potion') }}
+	@endif
+
 </div>
-
-<div class="shadow-line" style="margin: 0px -20px"></div>
-
-<h2>Available skills</h2>
-<ul>
-	@foreach($skills as $skill)
-		<li>{{ Services\Game\Skills\Skill::getDescription($skill) }}</li>
-	@endforeach
-</ul>
 
 @stop
 

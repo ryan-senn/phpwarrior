@@ -23,7 +23,7 @@
 	@endforeach
 	</ul>
 
-	{{ View::make('pages.map', ['map' => $map]) }}
+	{{ View::make('partials.map', ['map' => $map]) }}
 </div>
 
 @endforeach

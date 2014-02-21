@@ -21,7 +21,9 @@
 	</div>
 </div>
 
-<div class="shadow-line"></div>
+<div id="footer">
+	<div class="shadow-line"></div>
+</div>
 
 <script>
 	@yield('js')

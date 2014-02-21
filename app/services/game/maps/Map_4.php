@@ -10,7 +10,7 @@ use Services\Game\Items\Potion;
 class Map_4 extends BaseMap
 {
 
-	protected $description = 'The air is thick and it smells bad... There must be a lot of these Oozes around.<br /><br />If your health drops too low, you can take a sip from your potion like so <code>$this->drink()</code> to regenerate 3 life. Your potion has only 3 charges, use them wisely.';
+	protected $description = 'The air is thick and it smells bad... There must be a lot of Oozes around.<br /><br />If your health drops too low, you can take a sip from your potion like so <code>$this->drink()</code> to regenerate 3 life. Your potion has only 3 charges, use them wisely.';
 
 	protected $skills = ['feel', 'walk', 'attack', 'drink'];
 

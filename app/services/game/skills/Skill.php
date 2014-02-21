@@ -21,7 +21,7 @@ abstract class Skill
 	public static function getDescription($name)
 	{
 		$skill = 'Services\Game\Skills\\'. ucfirst($name);
-		return '<b>'. $name .'</b>: '. $skill::$description;
+		return $skill::$description;
 	}
 
 
