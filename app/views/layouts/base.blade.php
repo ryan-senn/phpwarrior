@@ -12,7 +12,7 @@
 
 <div id="header">
 	<div class="container">
-		<h1><a href="{{ URL::route('home.index') }}">PHP Manual</a></h1>
+		<h1><a href="{{ URL::route('home.index') }}">PHP Warrior</a></h1>
 	</div>
 </div>
 <div class="shadow-line" style="margin: 0px -20px"></div>

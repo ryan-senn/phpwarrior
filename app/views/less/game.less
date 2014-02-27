@@ -1,38 +1,41 @@
 div#editor
 {
-    border: 1px solid #ccc;
     position: relative;
-    height: 600px;
+    height: 700px;
     display: inline-block;
+    border-right: 1px solid #ddd;
+}
+
+.box
+{
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	.clearfix;
 }
 
 .level
 {
 	padding: 30px 0;
 
-	.container .box
+	.description
 	{
-		border: 1px solid #ddd;
-		border-radius: 5px;
+		border-bottom: 1px solid #ddd;
+		padding: 20px 15px;
+		margin: 0 -15px;
+		font-style: italic;
+	}
 
-		.description
-		{
-			border-bottom: 1px solid #ddd;
-			padding: 20px 15px;
-			margin: 0 -15px;
-			font-style: italic;
-		}
-
-		.instruction
-		{
-			padding: 20px 0;
-			background-color: #fafaf7;
-		}
+	.instruction
+	{
+		padding: 20px 0;
+		background-color: #fafaf7;
 	}
 }
 
 .api
 {
+    height: 620px;
+
     li
     {
         margin: 15px 0;
@@ -48,4 +51,18 @@ div#editor
 #content
 {
 	padding-bottom: 50px;
+}
+
+.clearfix
+{
+    &:before, &:after
+    {
+        content: "";
+        display: table;
+    }
+
+    &:after
+    {
+        clear:both;
+    }
 }

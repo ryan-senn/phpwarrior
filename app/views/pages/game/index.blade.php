@@ -20,13 +20,10 @@
 
 <div class="level">
 	<div class="container">
-		<div class="col-md-6 box">
+		<div class="col-md-12 box">
 			<h2>Level {{ $level }}</h2>
 			<div class="description">{{ $description }}</div>
 			<div class="instruction">{{ $instruction }}</div>
-		</div>
-		<div class="col-md-6">
-			{{ View::make('partials.map', ['map' => $map]) }}
 		</div>
 	</div>
 </div>
@@ -36,18 +33,20 @@
 {{ Form::close() }}
 
 <div class="container">
-	<div class="col-md-6" id="editor">{{ $code }}</div>
+	<div class="box">
+		<div class="col-md-6" id="editor">{{ $code }}</div>
+		<div class="col-md-6">
+			<a href="#" id="go">Go Warrior!</a>
+			{{ View::make('partials.skills', ['skills' => $skills]) }}
 
-	<div class="col-md-6">
-		{{ View::make('partials.skills', ['skills' => $skills]) }}
+			@if(in_array('feel', $skills))
+				{{ View::make('partials.space') }}
+			@endif
 
-		@if(in_array('feel', $skills))
-			{{ View::make('partials.space') }}
-		@endif
-
-		@if(in_array('drink', $skills))
-			{{ View::make('partials.potion') }}
-		@endif
+			@if(in_array('drink', $skills))
+				{{ View::make('partials.potion') }}
+			@endif
+		</div>
 	</div>
 </div>
 

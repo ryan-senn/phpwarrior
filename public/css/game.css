@@ -1,25 +1,36 @@
 div#editor {
-  border: 1px solid #ccc;
   position: relative;
-  height: 600px;
+  height: 700px;
   display: inline-block;
+  border-right: 1px solid #ddd;
+}
+.box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.box:before,
+.box:after {
+  content: "";
+  display: table;
+}
+.box:after {
+  clear: both;
 }
 .level {
   padding: 30px 0;
 }
-.level .container .box {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-.level .container .box .description {
+.level .description {
   border-bottom: 1px solid #ddd;
   padding: 20px 15px;
   margin: 0 -15px;
   font-style: italic;
 }
-.level .container .box .instruction {
+.level .instruction {
   padding: 20px 0;
   background-color: #fafaf7;
+}
+.api {
+  height: 620px;
 }
 .api li {
   margin: 15px 0;
@@ -30,4 +41,12 @@ div#editor {
 }
 #content {
   padding-bottom: 50px;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
 }
