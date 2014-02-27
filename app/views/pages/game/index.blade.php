@@ -10,6 +10,7 @@
 {{ HTML::script('ace/ace.js') }}
 {{ HTML::script('ace/mode-php.js') }}
 
+{{ HTML::style('css/game.css') }}
 {{ HTML::style('css/map.css') }}
 
 @stop
@@ -17,43 +18,37 @@
 
 @section('content')
 
-<div id="description">
-	<div class="text">
-		<h2>Level {{ $level }}</h2>
-		<span>{{ $description }}</span>
+<div class="level">
+	<div class="container">
+		<div class="col-md-6 box">
+			<h2>Level {{ $level }}</h2>
+			<div class="description">{{ $description }}</div>
+			<div class="instruction">{{ $instruction }}</div>
+		</div>
+		<div class="col-md-6">
+			{{ View::make('partials.map', ['map' => $map]) }}
+		</div>
 	</div>
-	<div class="map">{{ View::make('partials.map', ['map' => $map]) }}</div>
 </div>
 
 {{ Form::open(['route' => 'game.submit', 'method' => 'post']) }}
-
 <textarea name="code" style="display: none;"></textarea>
-
 {{ Form::close() }}
 
-<div id="editor">{{ $code }}</div>
+<div class="container">
+	<div class="col-md-6" id="editor">{{ $code }}</div>
 
+	<div class="col-md-6">
+		{{ View::make('partials.skills', ['skills' => $skills]) }}
 
-<div id="instructions">
+		@if(in_array('feel', $skills))
+			{{ View::make('partials.space') }}
+		@endif
 
-	<div style="margin-bottom: 20px;">
-		<a href="#" id="go" class="button">Go Warrior!</a>
-		<a href="{{ URL::route('game.simulate') }}" id="go" class="button" style="margin-left: 10px;">simulate</a>
+		@if(in_array('drink', $skills))
+			{{ View::make('partials.potion') }}
+		@endif
 	</div>
-
-	<div class="shadow-line" style="margin: 0px -20px"></div>
-
-
-	{{ View::make('partials.skills', ['skills' => $skills]) }}
-
-	@if(in_array('feel', $skills))
-		{{ View::make('partials.space') }}
-	@endif
-
-	@if(in_array('drink', $skills))
-		{{ View::make('partials.potion') }}
-	@endif
-
 </div>
 
 @stop

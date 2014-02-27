@@ -8,7 +8,8 @@ use Services\Game\Position;
 class Map_2 extends BaseMap
 {
 
-	protected $description = 'This time around, walking straight will get you stuck against a wall.<br /><br />Use <code>$this->getDirectionOfStairs()</code> to find out which way to walk.';
+	protected $description = 'The room apears to be empty again. What a boring dungeon...';
+	protected $instruction = 'Use <code>$this->getDirectionOfStairs()</code> to find out which way to walk.';
 
 	protected $skills = ['walk'];
 

@@ -5,6 +5,7 @@ abstract class Base
 {
 	
 	protected $description = 'no description';
+	protected $instruction = 'no instructions';
 	protected $skills = [];
 
 
@@ -17,5 +18,11 @@ abstract class Base
 	public function getDescription()
 	{
 		return $this->description;
+	}
+
+
+	public function getInstruction()
+	{
+		return $this->instruction;
 	}
 }

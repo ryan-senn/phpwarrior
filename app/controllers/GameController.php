@@ -39,6 +39,7 @@ class GameController extends BaseController
 			'level' => $level,
 			'skills' => $map->getSkills(),
 			'description' => $map->getDescription(),
+			'instruction' => $map->getInstruction(),
 		]);
 	}
 
