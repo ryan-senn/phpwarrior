@@ -1,5 +1,8 @@
+img {
+  opacity: 0.1;
+}
 #header {
-  background-color: #fafaf7;
+  background-color: #f7f7f9;
   margin: 0;
   padding: 10px 0;
 }
@@ -9,7 +12,7 @@
   box-shadow: inset 1px 4px 6px -6px #777770;
 }
 code {
-  background-color: #fafaf7;
+  background-color: #f7f7f9;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 3px;

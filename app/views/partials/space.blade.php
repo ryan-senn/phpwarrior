@@ -1,6 +1,6 @@
 <h2>Spaces</h2>
 
-<ul class="api">
+<ul>
 	<li>
 		<code>Space->isEmpty</code>
 		<span>If true, this means that nothing (except maybe stairs) is at this location and you can walk here.</span>

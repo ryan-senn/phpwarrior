@@ -1,6 +1,6 @@
 <h2>Warrior Skills</h2>
 
-<ul class="api">
+<ul>
 	@foreach($skills as $skill)
 	<li>
 		<code>$this->{{ $skill }}</code>

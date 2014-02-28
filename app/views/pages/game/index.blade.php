@@ -20,10 +20,15 @@
 
 <div class="level">
 	<div class="container">
-		<div class="col-md-12 box">
-			<h2>Level {{ $level }}</h2>
-			<div class="description">{{ $description }}</div>
-			<div class="instruction">{{ $instruction }}</div>
+		<div class="box">
+			<div class="col-md-10">
+				<h2>Level {{ $level }}</h2>
+				<div class="description">{{ $description }}</div>
+				<div class="instruction">{{ $instruction }}</div>
+			</div>
+			<div class="col-md-2 small-map">
+				{{ View::make('partials.map', ['map' => $map, 'size' => 31]) }}
+			</div>
 		</div>
 	</div>
 </div>
@@ -34,18 +39,22 @@
 
 <div class="container">
 	<div class="box">
-		<div class="col-md-6" id="editor">{{ $code }}</div>
-		<div class="col-md-6">
-			<a href="#" id="go">Go Warrior!</a>
-			{{ View::make('partials.skills', ['skills' => $skills]) }}
+		<div class="col-md-7" id="editor">{{ $code }}</div>
+		<div class="col-md-5">
+			<div class="actions">
+				<a href="#" id="go" class="btn btn-primary">Go Warrior!</a>
+			</div>
+			<div class="api">
+				{{ View::make('partials.skills', ['skills' => $skills]) }}
 
-			@if(in_array('feel', $skills))
-				{{ View::make('partials.space') }}
-			@endif
-
-			@if(in_array('drink', $skills))
-				{{ View::make('partials.potion') }}
-			@endif
+				@if(in_array('feel', $skills))
+					{{ View::make('partials.space') }}
+				@endif
+				
+				@if(in_array('drink', $skills))
+					{{ View::make('partials.potion') }}
+				@endif
+			</div>
 		</div>
 	</div>
 </div>

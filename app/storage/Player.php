@@ -7,6 +7,6 @@ class Warrior extends BaseWarrior
 
     public function playTurn()
     {
-        $this->walk($direction);
+        $this->walk();
     }
 }
