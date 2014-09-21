@@ -42,7 +42,7 @@
 		<div class="col-md-7" id="editor">{{ $code }}</div>
 		<div class="col-md-5">
 			<div class="actions">
-				<a href="#" id="go" class="btn btn-primary">Go Warrior!</a>
+				<a href="#" id="go" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Go Warrior!</a> <a href="{{ URL::route('game.simulate') }}" id="go" class="btn btn-default">debug</a>
 			</div>
 			<div class="api">
 				{{ View::make('partials.skills', ['skills' => $skills]) }}
